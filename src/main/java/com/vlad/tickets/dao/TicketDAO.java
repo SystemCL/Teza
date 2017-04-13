@@ -1,0 +1,18 @@
+package com.vlad.tickets.dao;
+
+import java.util.List;
+
+import com.vlad.model.Project;
+import com.vlad.model.Ticket;
+import com.vlad.model.Utilisateur;
+
+public interface TicketDAO {
+	public void addTicket(Ticket ticket);
+	public void updateTicket(Ticket ticket);
+	public Ticket getTicket(int id);
+	public void deleteTicket(int id);
+	public List<Ticket> getTickets();
+	public List<Project> getProjects();
+	public List<Utilisateur> getUtilisateurs();
+	
+}
