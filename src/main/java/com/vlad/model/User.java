@@ -3,21 +3,28 @@ package com.vlad.model;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "users", catalog = "test1")
 public class User {
 
+	@Id
+	@GeneratedValue
+	private Integer id;
 	private String username;
 	private String password;
 	private boolean enabled;
 	private Set<UserRole> userRole = new HashSet<UserRole>(0);
+    private Utilisateur userUtilisateur;
 
 	public User() {
 	}
@@ -34,6 +41,14 @@ public class User {
 		this.password = password;
 		this.enabled = enabled;
 		this.userRole = userRole;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	@Id
@@ -73,6 +88,15 @@ public class User {
 
 	public void setUserRole(Set<UserRole> userRole) {
 		this.userRole = userRole;
+	}
+	
+	@OneToOne(cascade = CascadeType.ALL)
+	public Utilisateur getUserUtilisateur() {
+		return userUtilisateur;
+	}
+
+	public void setUserUtilisateur(Utilisateur userUtilisateur) {
+		this.userUtilisateur = userUtilisateur;
 	}
 
 }
