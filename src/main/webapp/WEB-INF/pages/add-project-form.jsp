@@ -1,5 +1,6 @@
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@page session="true"%>
 
 <?xml version="1.0" encoding="ISO-8859-1" ?>
@@ -8,10 +9,16 @@
     pageEncoding="ISO-8859-1"%>
     
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 <title>Add project page</title>
+<style>
+     <%@ include file="MenuStyle.css"%>
+     
+</style>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.3/jquery.min.js" type="text/javascript"></script>
+
 </head>
 <body>
 <h1>Add project page</h1>
@@ -26,26 +33,24 @@
 <tbody>
 
 	<tr>
-		<td>Nom project:</td>
-		<td><form:input path="nomProject" required="required"/></td>
+		<td><form:input class="info" placeholder="Project name" path="nomProject" required="required"/></td>
 	</tr>
 	
 	<tr>
-		<td>Domain:</td>
-		<td><form:input path="domain" required="required"/></td>
+		<td><form:input class="info" placeholder="Domain" path="domain" required="required"/></td>
 	</tr>
 	
 	<tr>
-		<td>Date creation:</td>
-		<%-- <td><form:input path="enrolment_date" required="required" /></td> --%>
-		<td><input type="date" path="dateCreationP" class= "date" name = "dateCreationP" value = "<fmt:formatDate value="${cForm.dateCreationP}" pattern="yyyy-MM-dd"" /></td>
+	  <fmt:formatDate value="${cForm.dateCreationP}" pattern="yyyy-MM-dd" var="formattedDate"/> 
+	   <td><form:input style="color:dark; font-size:15px; height:33px; width:165px;" type="date" path="dateCreationP"  name="dateCreationP" value = "${formattedDate}" /></td> 
+	    
 	</tr>
 	
 	<tr>
 	</br>
 	<td><tr></tr></td>
-	<td></td>
-		<td align="right"><input type="submit" value="Add" onclick="return confirm('Add project with current values?')" /></td>
+	<td align="center"><input type="submit" value="Add" class="button button1" /></td>
+		<td></td>
 		<td></td>
 	</tr>
  <%-- 	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>  --%>

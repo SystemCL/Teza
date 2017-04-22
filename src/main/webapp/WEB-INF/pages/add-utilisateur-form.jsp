@@ -12,6 +12,10 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 <title>Add utilisateur page</title>
+<style>
+     <%@ include file="MenuStyle.css"%>
+     
+</style>
 </head>
 <body>
 <h1>Add utilisateur page</h1>
@@ -22,39 +26,25 @@
 
 <form:form method="POST" commandName="utilisateur" action="${pageContext.request.contextPath}/utilisateur/add.html">
 <h2 align="center">Fill utilisateur details</h2>
-<table align="center">
+<table align="center" border="0px">
 <tbody>
 
 	<tr>
-		<td>First name:</td>
-		<td><form:input path="firstName" required="required"/></td>
+		<td><form:input class="info" placeholder="First name" path="firstName" required="required"/></td>
 	</tr>
 	
 	<tr>
-		<td>Last name:</td>
-		<td><form:input path="lastName" required="required"/></td>
+		<td><form:input class="info" placeholder="Last name" path="lastName" required="required"/></td>
 	</tr>
 	
 	<tr>
-		<td>Age:</td>
-		<td><form:input path="age" /></td>
+		<td><form:input class="info" placeholder="Age" path="age" /></td>
 	</tr>
 	
 	<tr>
-	    <td>Project:</td>
-	     <td>
-	        <form:select path="project.id" enctype="multipart/form-data">
-	        <option value="Select" label=" - Select - " ></option>
-                 <form:options items="${projectsList}" path="project_id" itemValue= "id" itemLabel= "nomProject"></form:options>
-            </form:select>  
-         </td>
-	</tr>
-	
-	<tr>
-	</br>
 	<td><tr></tr></td>
-	<td></td>
-		<td align="right"><input type="submit" value="Add" onclick="return confirm('Add utilisateur with current values?')" /></td>
+	<td align="center"><input type="submit" value="Add" class="button button1" /></td>
+		
 		<td></td>
 	</tr>
  <%-- 	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>  --%>

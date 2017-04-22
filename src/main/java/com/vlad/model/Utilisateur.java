@@ -27,6 +27,7 @@ public class Utilisateur {
 	private String firstName;
 	@Column(name = "lastName")
 	private String lastName;
+	private String fullName;
 	@Column(name = "age")
 	private int age;
 	@OneToMany( /*fetch = FetchType.EAGER,*/ mappedBy="utilisateur", targetEntity = Ticket.class, cascade=CascadeType.ALL, fetch=FetchType.EAGER) 
@@ -35,6 +36,7 @@ public class Utilisateur {
 	private Set<UserAssignProject> userAssignProjects = new HashSet<UserAssignProject>(0);
 	@OneToMany(mappedBy="utilisateur", targetEntity=Message.class, cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	private Set<Message> messages = new HashSet<Message>(0);
+	
 	
 
 	public Integer getId() {
@@ -61,6 +63,15 @@ public class Utilisateur {
 	public void setAge(int age) {
 		this.age = age;
 	}
+	
+	public String getFullName() { 
+		return " " + firstName+" "+lastName;
+	}
+	
+	public void setFullName(String fullName) {
+		this.fullName = fullName;
+	}
+	
 	public Set<Ticket> getTickets() {
 		return tickets;
 	}
@@ -104,5 +115,4 @@ public class Utilisateur {
 		this.messages = messages;
 	}
 	
-
 }

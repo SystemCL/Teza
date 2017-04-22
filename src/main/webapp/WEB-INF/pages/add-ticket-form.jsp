@@ -1,5 +1,6 @@
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@page session="true"%>
 
 <?xml version="1.0" encoding="ISO-8859-1" ?>
@@ -22,67 +23,121 @@
 
 <form:form method="POST" commandName="ticket" action="${pageContext.request.contextPath}/ticket/add.html">
 <h2 align="center">Fill ticket details</h2>
-<table align="center">
-<tbody>
+<table align="center" border="0px">
+  <tr>
+    <th> </th>
+    <th> </th>
+    <th> </th>
+  </tr>
+  
+  <tr>
+  	<td>
+  		<form:input class="info" placeholder="Ticket name" path="nomTicket" required="required"/> 
+  	</td>
+  	<td>
+ 	    <form:select style="color:dark; font-size:15px; height:33px; width:169px;"  class="info" path="utilisateur.id" enctype="multipart/form-data">
+	      <option value="Select" label=" - User - " ></option>
+               <form:options items="${utilisateursList}" path="utilisateur_id" itemValue= "id" itemLabel= "fullName"></form:options>
+          </form:select>   
+    </td>
+  	
+  </tr>
+  
+  <tr>
+  		<fmt:formatDate value="${cForm.dateCreationT}" pattern="yyyy-MM-dd" var="formattedDate"/>
+	<td>
+		<form:input style="color:dark; font-size:15px; height:33px; width:165px;" type="date" placeholder="Creation date" path="dateCreationT" name = "dateCreationT" value = "${formattedDate}" />
+	</td>
+  	<td>
+  		<form:select style="color:dark; font-size:15px; height:33px; width:169px;" path="project.id" enctype="multipart/form-data">
+	        <option value="Select" label=" - Project - " ></option>
+                 <form:options items="${projectsList}" path="project_id" itemValue= "id" itemLabel= "nomProject"></form:options>
+            </form:select>  
+  	</td>
+  </tr>
+  		
+  <tr>
+  	<td>
+  		<form:input placeholder="Subject" class="info" path="sujetTicket" required="required"/>
+  	</td>
+  	<td>
+  		<form:select style="color:dark; font-size:15px; height:33px; width:169px;" path="permission.id" enctype="multipart/form-data">
+	        <option value="Select" label=" - Permission - " ></option>
+                 <form:options items="${permissionsList}" path="permission_id" itemValue= "id" itemLabel= "nomPermission"></form:options>
+            </form:select>
+  	</td>
+  	
+  </tr>
+   
+  <tr>
+  	<td>
+  	</td>
+  	<td>
+  		<form:select style="color:dark; font-size:15px; height:33px; width:169px;" path="priority.id" enctype="multipart/form-data">
+	        <option value="Select" label=" - Priority - " ></option>
+                 <form:options items="${prioritiesList}" path="priority_id" itemValue= "id" itemLabel= "nomPriority"></form:options>
+            </form:select>
+  	</td>
+  </tr>
+  
+  <tr>
+  	<th colspan="2">
+  		<!-- <input style="font-size:20px;" type="submit" value="Add" onclick="return confirm('Add ticket with current values?')" /> -->
+  		
+<!-- <button type="submit" value="Add" onclick="return confirm('Add ticket with current values?')">Submit</button> -->
+
+		<input type="submit" value="Add" class="button button1" />
+  	 </th>
+
+  </tr>
+
+
+
+<%-- <tbody>
 	<tr>
-		<td>Nom ticket:</td>
-		<td><form:input path="nomTicket" required="required"/></td>
+		<td><form:input class="info" placeholder="Ticket name" path="nomTicket" required="required"/></td>
 	</tr>
 	
 	<tr>
-		<td>Date creation:</td>
-		<%-- <td><form:input path="enrolment_date" required="required" /></td> --%>
-		<td><input type="date" path="dateCreationT" class= "date" name = "dateCreationT" value = "<fmt:formatDate value="${cForm.dateCreationT}" pattern="yyyy-MM-dd"" /></td>
+	    <fmt:formatDate value="${cForm.dateCreationT}" pattern="yyyy-MM-dd" var="formattedDate"/>
+		<td><input style="color:dark; font-size:15px; height:33px; width:165px;" type="date" placeholder="Creation date" path="dateCreationT" name = "dateCreationT" value = "${formattedDate}" /></td>
+	
+	 <fmt:formatDate value="${cForm.dateCreationP}" pattern="yyyy-MM-dd" var="formattedDate"/> 
+	   <td><form:input style="color:dark; font-size:15px; height:33px; width:165px;" type="date" path="dateCreationP"  name="dateCreationP" value = "${formattedDate}" /></td> 
+	
 	</tr>
 	
 	<tr>
-		<td>Sujet ticket:</td>
-		<td><form:input path="sujetTicket" required="required"/></td>
+		<td align="center"><form:input placeholder="Subject" class="info" path="sujetTicket" required="required"/></td>
 	</tr>
 
-	<%-- <tr>
+	<tr>
 		<td>Etat ticket:</td>
 		<td><form:input path="etatTicket" required="required"/></td>
-	</tr> --%>
+	</tr>
 	
 	<tr>
-	    <td>Utilisateur:</td>
 	     <td>
- 	        <form:select path="utilisateur.id" enctype="multipart/form-data">
-	        <option value="Select" label=" - Select - " ></option>
-                 <form:options items="${utilisateursList}" path="utilisateur_id" itemValue= "id" itemLabel= "firstName"></form:options>
+ 	        <form:select style="color:dark; font-size:15px; height:33px; width:169px;"  class="info" path="utilisateur.id" enctype="multipart/form-data">
+	        <option value="Select" label=" - User - " ></option>
+                 <form:options items="${utilisateursList}" path="utilisateur_id" itemValue= "id" itemLabel= "fullName"></form:options>
             </form:select>   
-            
-            <%-- <form:select path="utilisateur.id" enctype="multipart/form-data">
-            	<option value="Select" label=" - Select - " ></option>
-            	<c:forEach var="theUser" path="utilisateur_id"  items="{utilisateur.utilisateursList}">
-            		<form:option value="{theUser.id}"><c:out value="{theUser.firstName} {theUser.lastName}"/></form:option>
-            	</c:forEach>
-            </form:select> --%>
-            <%-- <form:select id="userSelect" name="userId" path="utilisateur.id">
-		    <option value="">Select person</option>
-		    <c:forEach var="theUser" items="${utilisateur.utilisateursList}">
-		        <form:option value="${theUser.id}"><c:out value="${theUser.firstName} ${theUser.lastName}"/></form:option>
-		    </c:forEach>
-		    </form:select> --%>
          </td>
 	</tr>
 	
 	<tr>
-	    <td>Project:</td>
 	     <td>
- 	        <form:select path="project.id" enctype="multipart/form-data">
-	        <option value="Select" label=" - Select - " ></option>
+ 	        <form:select style="color:dark; font-size:15px; height:33px; width:169px;" path="project.id" enctype="multipart/form-data">
+	        <option value="Select" label=" - Project - " ></option>
                  <form:options items="${projectsList}" path="project_id" itemValue= "id" itemLabel= "nomProject"></form:options>
             </form:select>  
          </td>
     </tr> 
     
     <tr>
-	    <td>Permission:</td>
 	     <td>
- 	        <form:select path="permission.id" enctype="multipart/form-data">
-	        <option value="Select" label=" - Select - " ></option>
+ 	        <form:select style="color:dark; font-size:15px; height:33px; width:169px;" path="permission.id" enctype="multipart/form-data">
+	        <option value="Select" label=" - Permission - " ></option>
                  <form:options items="${permissionsList}" path="permission_id" itemValue= "id" itemLabel= "nomPermission"></form:options>
             </form:select>  
          </td>
@@ -90,10 +145,9 @@
 	
 	
 	<tr>
-	    <td>Priority:</td>
 	     <td>
- 	        <form:select path="priority.id" enctype="multipart/form-data">
-	        <option value="Select" label=" - Select - " ></option>
+ 	        <form:select style="color:dark; font-size:15px; height:33px; width:169px;" path="priority.id" enctype="multipart/form-data">
+	        <option value="Select" label=" - Priority - " ></option>
                  <form:options items="${prioritiesList}" path="priority_id" itemValue= "id" itemLabel= "nomPriority"></form:options>
             </form:select>  
          </td>
@@ -107,7 +161,7 @@
 		<td></td>
 	</tr>
  
-</tbody>
+</tbody> --%>
 </table>
 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 </form:form>

@@ -9,6 +9,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 <title>List of projects</title>
+<style>
+    <%@ include file="table.css"%>
+</style>
 </head>
 <body>
 <h1>List of projects</h1>
@@ -25,7 +28,7 @@
 
 <tbody>
 <c:forEach var="project" items="${projects}">
-<tr>
+<tr onclick="window.document.location='#';">
 	<td align="center">${project.id}</td>
 	<td>${project.nomProject}</td>
 	<td align="center">${project.domain}</td>
@@ -35,6 +38,8 @@
 	<a href="${pageContext.request.contextPath}/project/delete/${project.id}.html">Delete</a><br/>
 	</td>
 </tr>
+
+
 </c:forEach>
 </tbody>
 </table>

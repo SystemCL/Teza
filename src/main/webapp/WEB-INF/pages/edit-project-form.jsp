@@ -1,9 +1,7 @@
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-
 <?xml version="1.0" encoding="ISO-8859-1" ?>
-
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -17,6 +15,9 @@
 	src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
 
 <title>Edit project page</title>
+<style>
+     <%@ include file="MenuStyle.css"%>
+</style>
 </head>
 <body>
 	<h1>Edit project page</h1>
@@ -29,26 +30,28 @@
 			<tbody>
 				<tr>
 					<td>Nom project:</td>
-					<td><form:input path="nomProject" required="required"/></td>
+					<td><form:input class="info" path="nomProject" required="required"/></td>
 				</tr>
 				
 				<tr>
 					<td>Domain:</td>
-					<td><form:input path="domain" required="required"/></td>
+					<td><form:input class="info" path="domain" required="required"/></td>
 				</tr>
 				
 				<tr>
 					<td>Date creation:</td>
-					<%-- <td><form:input path="enrolment_date" required="required" /></td> --%>
-					<td><input type="date" path="dateCreationP" class= "date" name = "dateCreationP" value = "<fmt:formatDate value="${cForm.dateCreationP}" pattern="yyyy-MM-dd"" /></td>
+					<fmt:formatDate value="${cForm.dateCreationP}" pattern="yyyy-MM-dd" var="formattedDate"/> 
+					<td><form:input type="date" style="color:dark; font-size:15px; height:35px; width:169px; 
+							box-sizing: border-box;border: 2px solid #ccc; border-radius: 9px;" 
+                            path="dateCreationP" name = "dateCreationP" value = "${formattedDate}" />
+                    </td>
 				</tr>
 
 				<tr>
 					</br>
 					<td><tr></tr></td>
 					<td></td>
-					<td align="right"><input type="submit" value="Edit"
-						onclick="return confirm('Are you sure you want to continue?')" /></td>
+					<td><input type="submit" value="Edit" class="button button1" /></td>
 					<td></td>
 				</tr>
 			</tbody>

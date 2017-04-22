@@ -9,6 +9,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 <title>List of tickets</title>
+<style>
+    <%@ include file="table.css"%>
+</style>
 </head>
 <body>
 <h1>List of tickets</h1>
@@ -19,17 +22,8 @@
 <table border="2px" cellpadding="0" cellspacing="0" align="center" width="750">
 <thead>
 
-<!-- private String nomTicket;
-	@Temporal(TemporalType.DATE)
-	@DateTimeFormat(pattern="yyyy.MM.dd")
-	@Column(name = "dateCreationT")
-	private Date dateCreationT;
-	@Column(name = "sujetTicket")
-	private String sujetTicket;
-	@Column(name = "etatTicket")
-	private String etatTicket; -->
 <tr bgcolor="#dbf0db">
-<th width="3%">id</th><th width="5%">Nom</th><th width="5%">Date Creation</th><th width="2%">Sujet</th><th width="2%">Actions</th>
+<th width="3%">id</th><th width="5%">Ticket</th><th width="5%">Date Creation</th><th width="2%">Subject</th><th width="2%">Actions</th>
 </tr>
 </thead>
 <tbody>

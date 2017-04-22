@@ -2,13 +2,18 @@ package com.vlad.tickets.dao;
 
 import java.util.List;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Repository;
 
 
 import com.vlad.model.Project;
+import com.vlad.model.User;
 
 @Repository
 public class ProjectDAOImpl implements ProjectDAO {
@@ -52,7 +57,33 @@ public class ProjectDAOImpl implements ProjectDAO {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Project> getProjects() {
-		return getCurrentSession().createQuery("from Project").list();
+		
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		//String userName = auth.getName();
+		Query query = sessionFactory.getCurrentSession().createQuery(
+				"FROM Project WHERE id IN "
+				+ "(SELECT project FROM UserAssignProject WHERE utilisateur = "
+				+ "(SELECT id FROM Utilisateur WHERE id ="
+				+ "(SELECT userUtilisateur FROM User WHERE username = :username))) order by id asc");
+		if(auth instanceof UserDetails) {
+			String userName = ((UserDetails)auth).getUsername();
+			query.setParameter("username", userName);
+			List<Project> list = query.list();
+			return list;
+		} else {
+			String userName = auth.getName();
+			query.setParameter("username", userName);
+			List<Project> list = query.list();
+			return list;
+		}
+		
+		
+		//User user = (User)SecurityContextHolder.getContext().getAuthentication();
+		
+		//String userName = user.getUsername();
+
+		
+		
 	}
 
 
