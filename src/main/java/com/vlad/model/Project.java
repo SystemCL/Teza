@@ -15,12 +15,15 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.vlad.model.Ticket;
 
 @Entity
 @Table(name="project")
+//@Cache(usage=CacheConcurrencyStrategy.READ_WRITE)
 public class Project {
 	@Id
 	@GeneratedValue

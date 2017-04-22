@@ -48,7 +48,7 @@
 		<td>Enrolment date:</td>
 		<td><form:input path="enrolment_date" /></td>
 	</tr> --%>
-	<tr>
+	<%-- <tr>
 	    <td>Project:</td>
 	     <td>
 	        <form:select path="project.id" enctype="multipart/form-data">
@@ -56,7 +56,7 @@
                  <form:options items="${projectsList}" path="project_id" itemValue= "id" itemLabel= "nomProject"></form:options>
             </form:select>  
          </td>
-	</tr>
+	</tr> --%>
 
 	<tr>
 	</br>

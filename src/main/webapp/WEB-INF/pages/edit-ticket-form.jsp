@@ -43,10 +43,10 @@
 					<td><form:input path="sujetTicket" required="required"/></td>
 				</tr>
 			
-				<tr>
+				<%-- <tr>
 					<td>Etat ticket:</td>
 					<td><form:input path="etatTicket" required="required"/></td>
-				</tr>
+				</tr> --%>
 				
 				<tr>
 				    <td>Utilisateur:</td>
@@ -66,7 +66,26 @@
 		            </form:select>  
 		         </td>
 		        </tr> 
+		        
+		        <tr>
+			    <td>Permission:</td>
+			     <td>
+		 	        <form:select path="permission.id" enctype="multipart/form-data">
+			        <option value="Select" label=" - Select - " ></option>
+		                 <form:options items="${permissionsList}" path="permission_id" itemValue= "id" itemLabel= "nomPermission"></form:options>
+		            </form:select>  
+		         </td>
+		        </tr> 
 	
+				<tr>
+			    <td>Priority:</td>
+			     <td>
+		 	        <form:select path="priority.id" enctype="multipart/form-data">
+			        <option value="Select" label=" - Select - " ></option>
+		                 <form:options items="${prioritiesList}" path="priority_id" itemValue= "id" itemLabel= "nomPriority"></form:options>
+		            </form:select>  
+		         </td>
+		        </tr> 
 				<tr>
 					</br>
 					<td><tr></tr></td>

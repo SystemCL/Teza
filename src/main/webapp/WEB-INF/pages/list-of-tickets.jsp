@@ -29,17 +29,16 @@
 	@Column(name = "etatTicket")
 	private String etatTicket; -->
 <tr bgcolor="#dbf0db">
-<th width="3%">id</th><th width="5%">Nom</th><th width="5%">Date Creation</th><th width="2%">Sujet</th><th width="5%">Etat</th><th width="2%">Actions</th>
+<th width="3%">id</th><th width="5%">Nom</th><th width="5%">Date Creation</th><th width="2%">Sujet</th><th width="2%">Actions</th>
 </tr>
 </thead>
 <tbody>
 <c:forEach var="ticket" items="${tickets}">
 <tr>
-	<td align="center">${ticket.id}</td>
+ 	<td align="center">${ticket.id}</td> 
 	<td>${ticket.nomTicket}</td>
 	<td>${ticket.dateCreationT}</td>
 	<td align="center">${ticket.sujetTicket}</td>
-	<td align="center">${ticket.etatTicket}</td>
 	<td width="5%" >
 	<a href="${pageContext.request.contextPath}/ticket/edit/${ticket.id}.html">Edit</a><br/>
 	<a href="${pageContext.request.contextPath}/ticket/delete/${ticket.id}.html">Delete</a><br/>

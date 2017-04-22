@@ -35,6 +35,7 @@ public class MyUserDetailsService implements UserDetailsService {
 		return buildUserForAuthentication(user, authorities);
 		
 	}
+	
 
 	// Converts com.vlad.model.User user to
 	// org.springframework.security.core.userdetails.User

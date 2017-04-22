@@ -2,6 +2,8 @@ package com.vlad.tickets.dao;
 
 import java.util.List;
 
+import com.vlad.model.Permission;
+import com.vlad.model.Priority;
 import com.vlad.model.Project;
 import com.vlad.model.Ticket;
 import com.vlad.model.Utilisateur;
@@ -12,6 +14,8 @@ public interface TicketDAO {
 	public Ticket getTicket(int id);
 	public void deleteTicket(int id);
 	public List<Ticket> getTickets();
+	public List<Permission> getPermissions();
+	public List<Priority> getPriorities();
 	public List<Project> getProjects();
 	public List<Utilisateur> getUtilisateurs();
 	

@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.vlad.model.Permission;
+import com.vlad.model.Priority;
 import com.vlad.model.Project;
 import com.vlad.model.Ticket;
 import com.vlad.model.Utilisateur;
@@ -42,12 +44,6 @@ public class TicketServiceImpl  implements TicketService{
 		ticketDAO.deleteTicket(id);
 		
 	}
-	
-	@Override
-	public List<Ticket> getTickets() {
-		return ticketDAO.getTickets();
-		
-	}
 
 	@Override
 	public List<Project> getProjects() {
@@ -59,6 +55,23 @@ public class TicketServiceImpl  implements TicketService{
 	public List<Utilisateur> getUtilisateurs() {
 		return ticketDAO.getUtilisateurs();
 		
+	}
+
+	@Override
+	public List<Permission> getPermissions() {
+		
+		return ticketDAO.getPermissions();
+	}
+
+	@Override
+	public List<Priority> getPriorities() {
+		
+		return ticketDAO.getPriorities();
+	}
+
+	@Override
+	public List<Ticket> getTickets() {
+		return ticketDAO.getTickets();
 	}
 
 
