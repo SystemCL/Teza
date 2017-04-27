@@ -36,7 +36,9 @@ public class ProjectDAOImpl implements ProjectDAO {
 		Project projectToUpdate = getProject(project.getId());
 		projectToUpdate.setNomProject(project.getNomProject());
 		projectToUpdate.setDomain(project.getDomain());
-		projectToUpdate.setDateCreationP(project.getDateCreationP());
+		//projectToUpdate.setDateCreationP(project.getDateCreationP());
+		projectToUpdate.setBeginninglife(project.getBeginninglife());
+
 		getCurrentSession().update(projectToUpdate);
 		
 	}

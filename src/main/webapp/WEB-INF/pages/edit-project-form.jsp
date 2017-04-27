@@ -38,14 +38,14 @@
 					<td><form:input class="info" path="domain" required="required"/></td>
 				</tr>
 				
-				<tr>
+				<%-- <tr>
 					<td>Date creation:</td>
 					<fmt:formatDate value="${cForm.dateCreationP}" pattern="yyyy-MM-dd" var="formattedDate"/> 
 					<td><form:input type="date" style="color:dark; font-size:15px; height:35px; width:169px; 
 							box-sizing: border-box;border: 2px solid #ccc; border-radius: 9px;" 
                             path="dateCreationP" name = "dateCreationP" value = "${formattedDate}" />
                     </td>
-				</tr>
+				</tr> --%>
 
 				<tr>
 					</br>

@@ -1,0 +1,14 @@
+INSERT INTO `utilisateur` (`id`, `age`, `firstName`, `fullName`, `lastName`) VALUES ('1', '23', 'Tuchila', 'Tuchila Ion', 'Ion');
+INSERT INTO `utilisateur` (`id`, `age`, `firstName`, `fullName`, `lastName`) VALUES ('2', '23', 'Ploaia', 'Ploaia Vladislav', 'Vladislav');
+
+INSERT INTO `users` (`username`, `enabled`, `id`, `password`, `userUtilisateur_id`) VALUES ('user', '1', '1', 'userpass', '1');
+INSERT INTO `users` (`username`, `enabled`, `id`, `password`, `userUtilisateur_id`) VALUES ('admin', '1', '2', 'adminpass', '2');
+
+INSERT INTO `user_roles` (`user_role_id`, `role`, `username`) VALUES ('1', 'ROLE_ADMIN', 'admin');
+INSERT INTO `user_roles` (`user_role_id`, `role`, `username`) VALUES ('2', 'ROLE_USER', 'user');
+
+INSERT INTO `project` (`id`, `created`, `updated`, `domain`, `nomProject`) VALUES ('1', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'sdas', 'das');
+
+INSERT INTO `userassignproject` (`id`, `dateCreationUserAssignProject`, `project_id`, `utilisateur_id`) VALUES ('1', '2017-04-27', '1', '2');
+
+

@@ -32,7 +32,8 @@
 	<td align="center">${project.id}</td>
 	<td>${project.nomProject}</td>
 	<td align="center">${project.domain}</td>
-	<td align="center">${project.dateCreationP}</td>
+   <%--  <td align="center">${project.created}</td>  --%>
+	<%-- <td align="center">${project.dateCreationP}</td> --%>
 	<td width="5%" >
 	<a href="${pageContext.request.contextPath}/project/edit/${project.id}.html">Edit</a><br/>
 	<a href="${pageContext.request.contextPath}/project/delete/${project.id}.html">Delete</a><br/>

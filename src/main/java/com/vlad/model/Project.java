@@ -24,7 +24,7 @@ import com.vlad.model.Ticket;
 @Entity
 @Table(name="project")
 //@Cache(usage=CacheConcurrencyStrategy.READ_WRITE)
-public class Project {
+public class Project extends AbstractTimestampEntity {
 	@Id
 	@GeneratedValue
 	private Integer id;
@@ -32,10 +32,10 @@ public class Project {
 	private String nomProject;
 	@Column(name = "domain")
 	private String domain;
-	@Temporal(TemporalType.DATE)
+/*	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern="yyyy.MM.dd")
 	@Column(name = "dateCreationP")
-	private Date dateCreationP;
+	private Date dateCreationP;*/
 	@OneToMany( /*fetch = FetchType.EAGER,*/ mappedBy="project", targetEntity = Ticket.class, cascade=CascadeType.ALL, fetch=FetchType.EAGER) 
 	private Set<Ticket> tickets = new HashSet<Ticket>(0);
 	@OneToMany( /*fetch = FetchType.EAGER,*/ mappedBy="project", targetEntity = UserAssignProject.class, cascade=CascadeType.ALL, fetch=FetchType.EAGER) 
@@ -60,12 +60,12 @@ public class Project {
 	public void setDomain(String domain) {
 		this.domain = domain;
 	}
-	public Date getDateCreationP() {
+	/*public Date getDateCreationP() {
 		return dateCreationP;
 	}
 	public void setDateCreationP(Date dateCreationP) {
 		this.dateCreationP = dateCreationP;
-	}
+	}*/
 	
 	public Set<Ticket> getTickets() {
 		return tickets;
