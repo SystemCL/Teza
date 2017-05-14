@@ -29,14 +29,21 @@
 		<table align="center">
 			<tbody>
 				<tr>
-					<td>Nom project:</td>
 					<td><form:input class="info" path="nomProject" required="required"/></td>
 				</tr>
 				
 				<tr>
+				    <td>
+					   <form:select style="color:dark; font-size:15px; height:33px; width:169px;" path="domainProject.id" enctype="multipart/form-data">
+			             <option value="Select" label=" - Domain - " ></option>
+			             <form:options items="${domainsList}" path="domain_id" itemValue= "id" itemLabel= "nameDomain"></form:options>
+			           </form:select>  
+	               </td>
+                </tr>
+			<%-- 	<tr>
 					<td>Domain:</td>
 					<td><form:input class="info" path="domain" required="required"/></td>
-				</tr>
+				</tr> --%>
 				
 				<%-- <tr>
 					<td>Date creation:</td>

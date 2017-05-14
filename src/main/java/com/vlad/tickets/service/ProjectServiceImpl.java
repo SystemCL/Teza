@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.vlad.model.DomainProject;
 import com.vlad.model.Project;
 import com.vlad.tickets.dao.ProjectDAO;
 
@@ -45,6 +46,21 @@ public class ProjectServiceImpl implements ProjectService {
 	public List<Project> getProjects() {
 		return projectDAO.getProjects();
 		
+	}
+
+	@Override
+	public List<DomainProject> getDomains() {
+		return projectDAO.getDomains();
+	}
+
+	@Override
+	public DomainProject getDomain(int id) {
+		return projectDAO.getDomain(id);
+	}
+
+	@Override
+	public List<Project> getSearchProjects(String text) {
+		return projectDAO.getSearchProjects(text);
 	}
 
 }

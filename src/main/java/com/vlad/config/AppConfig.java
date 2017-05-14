@@ -38,7 +38,12 @@ public class AppConfig {
         prop.put("hibernate.show_sql", "true");
         prop.put("hibernate.dialect", "org.hibernate.dialect.MySQL5Dialect");
         prop.put("hibernate.hbm2ddl.auto", "update");
-       // prop.put("hibernate.enable_lazy_load_no_trans", "true");
+        // -- am modificat
+        prop.put("spring.jpa.properties.hibernate.search.default.directory_provider", "filesystem");
+        prop.put("spring.jpa.properties.hibernate.search.default.indexBase", "/var/lucene/indexes");
+        prop.put("spring.jpa.properties.hibernate.search.default.indexmanager", "near-real-time");
+        //
+        // prop.put("hibernate.enable_lazy_load_no_trans", "true");
         return prop;
     }
 	

@@ -5,13 +5,16 @@ import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.search.FullTextSession;
+import org.hibernate.search.Search;
+import org.hibernate.search.query.dsl.QueryBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Repository;
 
-
+import com.vlad.model.DomainProject;
 import com.vlad.model.Project;
 import com.vlad.model.User;
 
@@ -35,12 +38,15 @@ public class ProjectDAOImpl implements ProjectDAO {
 	public void updateProject(Project project) {
 		Project projectToUpdate = getProject(project.getId());
 		projectToUpdate.setNomProject(project.getNomProject());
-		projectToUpdate.setDomain(project.getDomain());
+		projectToUpdate.setDomainProject(project.getDomainProject());
 		//projectToUpdate.setDateCreationP(project.getDateCreationP());
-		projectToUpdate.setBeginninglife(project.getBeginninglife());
+		//projectToUpdate.setCreated(project.getDateCreationP());
+		projectToUpdate.setDateCreationP(project.getDateCreationP());
+		//projectToUpdate.setBeginninglife1(project.getBeginninglife1());
 
 		getCurrentSession().update(projectToUpdate);
-		
+
+		//sessionFactory.getCurrentSession().merge(project);
 	}
 
 	@Override
@@ -79,13 +85,48 @@ public class ProjectDAOImpl implements ProjectDAO {
 			return list;
 		}
 		
-		
-		//User user = (User)SecurityContextHolder.getContext().getAuthentication();
-		
+		//User user = (User)SecurityContextHolder.getContext().getAuthentication();	
 		//String userName = user.getUsername();
+		
+		
+	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<DomainProject> getDomains() {
+		return getCurrentSession().createQuery("from DomainProject").list();
+	}
+
+	@Override
+	public DomainProject getDomain(int id) {
+		DomainProject domain = (DomainProject) getCurrentSession().get(DomainProject.class, id);
+		return domain;
+	}
+
+	@Override
+	public List<Project> getSearchProjects(String text) {
+		// Lista Returneaza NULL
+		FullTextSession fullTextSession = Search.getFullTextSession(getCurrentSession());
+		QueryBuilder builder = fullTextSession.getSearchFactory()
+				.buildQueryBuilder()
+				.forEntity(Project.class)
+				.get();
+		org.apache.lucene.search.Query query =
+				builder.keyword().wildcard().onField("nomProject").matching(text + "*").createQuery();
+		System.out.println("======" + query.toString());
 		
+		org.hibernate.search.FullTextQuery ftq =
+				fullTextSession.createFullTextQuery(query, Project.class);
+		@SuppressWarnings("unchecked")
+		List<Project> projectSearchList = ftq.list();
 		
+/*		Query query = sessionFactory.getCurrentSession().createQuery(
+				"Select a FROM Project a WHERE a.nomProject like ?");
+		query.setParameter(0, "%" + text + "%");
+		@SuppressWarnings("unchecked")
+		List<Project> list = query.list();*/
+		
+		return projectSearchList;
 	}
 
 

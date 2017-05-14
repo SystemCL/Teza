@@ -7,8 +7,14 @@ INSERT INTO `users` (`username`, `enabled`, `id`, `password`, `userUtilisateur_i
 INSERT INTO `user_roles` (`user_role_id`, `role`, `username`) VALUES ('1', 'ROLE_ADMIN', 'admin');
 INSERT INTO `user_roles` (`user_role_id`, `role`, `username`) VALUES ('2', 'ROLE_USER', 'user');
 
-INSERT INTO `project` (`id`, `created`, `updated`, `domain`, `nomProject`) VALUES ('1', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'sdas', 'das');
+INSERT INTO `domainproject` (`id`, `nameDomain`) VALUES ('1', 'Aerospace');
+INSERT INTO `domainproject` (`id`, `nameDomain`) VALUES ('2', 'Agriculture');
+INSERT INTO `domainproject` (`id`, `nameDomain`) VALUES ('3', 'Education');
+INSERT INTO `domainproject` (`id`, `nameDomain`) VALUES ('4', 'Economie');
+
+INSERT INTO `project` (`id`, `beginninglife1`, `updated`, `nomProject`, `domain_id`, `dateCreationP`) VALUES ('1', NULL, CURRENT_TIMESTAMP, 'E-Learning', '3', CURRENT_TIMESTAMP);
+INSERT INTO `project` (`id`, `beginninglife1`, `updated`, `nomProject`, `domain_id`, `dateCreationP`) VALUES ('2', NULL, CURRENT_TIMESTAMP, 'Product Management', '4', CURRENT_TIMESTAMP);
 
 INSERT INTO `userassignproject` (`id`, `dateCreationUserAssignProject`, `project_id`, `utilisateur_id`) VALUES ('1', '2017-04-27', '1', '2');
-
+INSERT INTO `userassignproject` (`id`, `dateCreationUserAssignProject`, `project_id`, `utilisateur_id`) VALUES ('2', '2017-04-27', '2', '2');
 

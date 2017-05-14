@@ -9,11 +9,11 @@
 <head>
 <style>
      <%@ include file="MenuStyle.css"%>
-     
+
 </style>
+
 </head>
 <body>
-	
  <ul>
 
    <li><a class="active" href="${pageContext.request.contextPath}/index.html">Home</a></li>
@@ -50,11 +50,12 @@
 <li><a style="padding-right:20px" class="active" href="${pageContext.request.contextPath}/login"><font color="#F59C6E" size="3px"><b>Login</b></font></a></li>
 </c:if>
 
-<form>
-  <input class="header" type="text" name="search" placeholder="Search..">
-</form>
+<form id="searchForm" action="search">
+  <input class="header" id="searchString" name="searchTerm" type="text" placeholder="Search.."> <!-- name="name"  -->
+</form> 
 
  </ul>
+ 
 
 </body>
 </html>
