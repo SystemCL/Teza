@@ -55,7 +55,7 @@
 				     <td>
 				        <form:select style="color:dark; font-size:15px; height:33px; width:169px;" path="utilisateur.id" enctype="multipart/form-data">
 				        <option value="Select" label=" - User - " ></option>
-			                 <form:options items="${utilisateursList}" path="utilisateur_id" itemValue= "id" itemLabel= "firstName"></form:options>
+			                 <form:options items="${utilisateursList}" path="utilisateur_id" itemValue= "id" itemLabel= "fullName"></form:options>
 			            </form:select>  
 			         </td>
 				</tr>

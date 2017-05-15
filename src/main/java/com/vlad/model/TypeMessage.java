@@ -12,18 +12,25 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name="typeMessage")
 public class TypeMessage {
 	@Id
 	@GeneratedValue
 	private Integer id;
+	
 	@Column(name = "nomTypeMessage")
 	private String nomTypeMessage;
+	
 	@OneToMany(mappedBy="typeMessage", targetEntity = Ticket.class, cascade=CascadeType.ALL /*, fetch = FetchType.EAGER*/) 
-    private Set<Ticket> tickets = new HashSet<Ticket>(0);
+	@JsonBackReference
+	private Set<Ticket> tickets = new HashSet<Ticket>(0);
+	
 	@OneToMany(mappedBy="typeMessage", targetEntity = Message.class, cascade=CascadeType.ALL , fetch = FetchType.EAGER) 
-    private Set<Message> messages = new HashSet<Message>(0);
+	@JsonBackReference
+	private Set<Message> messages = new HashSet<Message>(0);
 	
 	public Integer getId() {
 		return id;

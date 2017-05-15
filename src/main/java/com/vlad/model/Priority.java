@@ -10,16 +10,22 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name="priority")
 public class Priority {
 	@Id
 	@GeneratedValue
 	private Integer id;
+	
 	@Column(name = "nomPriority")
 	private String nomPriority;
+	
 	@OneToMany(mappedBy="priority", targetEntity = Ticket.class, cascade=CascadeType.ALL /*, fetch = FetchType.EAGER*/) 
-    private Set<Ticket> tickets;
+	@JsonBackReference
+	private Set<Ticket> tickets;
+	
 	public Integer getId() {
 		return id;
 	}

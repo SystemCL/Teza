@@ -18,3 +18,18 @@ INSERT INTO `project` (`id`, `beginninglife1`, `updated`, `nomProject`, `domain_
 INSERT INTO `userassignproject` (`id`, `dateCreationUserAssignProject`, `project_id`, `utilisateur_id`) VALUES ('1', '2017-04-27', '1', '2');
 INSERT INTO `userassignproject` (`id`, `dateCreationUserAssignProject`, `project_id`, `utilisateur_id`) VALUES ('2', '2017-04-27', '2', '2');
 
+INSERT INTO `permission` (`id`, `bitwise`, `nomPermission`, `userassignproject_id`) VALUES ('1', '2', 'FULL', '2');
+INSERT INTO `permission` (`id`, `bitwise`, `nomPermission`, `userassignproject_id`) VALUES ('2', '4', 'MEDIUM', '1');
+
+INSERT INTO `priority` (`id`, `nomPriority`) VALUES ('1', 'High');
+INSERT INTO `priority` (`id`, `nomPriority`) VALUES ('2', 'Low');
+
+INSERT INTO `typemessage` (`id`, `nomTypeMessage`) VALUES ('1', 'ProjectMessage');
+INSERT INTO `typemessage` (`id`, `nomTypeMessage`) VALUES ('2', 'TicketMessage');
+INSERT INTO `typemessage` (`id`, `nomTypeMessage`) VALUES ('3', 'UserMessage');
+
+INSERT INTO `ticket` (`id`, `created`, `updated`, `dateCreationT`, `nomTicket`, `sujetTicket`, `permission_id`, `priority_id`, `project_id`, `typemessage_id`, `utilisateur_id`) VALUES ('1', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'Ticket_1', 'SubjectTicket1', '1', '2', '2', '2', '2');
+INSERT INTO `ticket` (`id`, `created`, `updated`, `dateCreationT`, `nomTicket`, `sujetTicket`, `permission_id`, `priority_id`, `project_id`, `typemessage_id`, `utilisateur_id`) VALUES ('2', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'Ticket_2', 'SubjectTicket_2', '1', '1', '1', '1', '1');
+
+INSERT INTO `stateticket` (`id`, `nomStateTicket`, `ticket_id`) VALUES ('1', 'Open', '1');
+INSERT INTO `stateticket` (`id`, `nomStateTicket`, `ticket_id`) VALUES ('2', 'In pending', '2');

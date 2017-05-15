@@ -19,24 +19,35 @@ import javax.persistence.TemporalType;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name="userAssignProject")
 public class UserAssignProject {
 	@Id
 	@GeneratedValue
 	private Integer id;
+	
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern="yyyy.MM.dd")
 	@Column(name = "dateCreationUserAssignProject")
 	private Date dateCreationUserAssignProject;
+	
 	@OneToMany( /*fetch = FetchType.EAGER,*/ mappedBy="userAssignProject", targetEntity = Permission.class, cascade=CascadeType.ALL, fetch=FetchType.EAGER) 
+	@JsonBackReference
 	private Set<Permission> permissions;
+	
 	@ManyToOne(/*fetch = FetchType.EAGER*/)
 	@JoinColumn(name = "utilisateur_id")
-    private Utilisateur utilisateur;
+	@JsonManagedReference
+	private Utilisateur utilisateur;
+	
 	@ManyToOne(/*fetch = FetchType.EAGER*/)
 	@JoinColumn(name = "project_id")
+	@JsonManagedReference
     private Project project;
+	
 	public Integer getId() {
 		return id;
 	}

@@ -14,43 +14,64 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.UniqueConstraint;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.vlad.model.Utilisateur;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.vlad.model.Project;
 
 @Entity
 @Table(name="ticket")
-public class Ticket {
+/*@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@ticketId")*/
+public class Ticket extends AbstractTimestampEntity {
 	@Id
 	@GeneratedValue
 	private Integer id;
+	
 	@Column(name = "nomTicket")
 	private String nomTicket;
+	
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern="yyyy.MM.dd")
-	@Column(name = "dateCreationT")
+	@Column(name = "dateCreationT", columnDefinition = "TIMESTAMP default CURRENT_TIMESTAMP")
 	private Date dateCreationT;
+	
 	@Column(name = "sujetTicket")
 	private String sujetTicket;
+	
 	@ManyToOne(/*fetch = FetchType.EAGER*/)
 	@JoinColumn(name = "project_id")
+	@JsonManagedReference
     private Project project;
+	
 	@ManyToOne(/*fetch = FetchType.EAGER*/)
 	@JoinColumn(name = "utilisateur_id")
+	@JsonManagedReference
     private Utilisateur utilisateur;
+	
 	@ManyToOne(/*fetch = FetchType.EAGER*/)
 	@JoinColumn(name = "priority_id")
+	@JsonManagedReference
     private Priority priority;
+	
 	@ManyToOne(/*fetch = FetchType.EAGER*/)
 	@JoinColumn(name = "permission_id")
+	@JsonManagedReference
     private Permission permission;
+	
 	@ManyToOne(/*fetch = FetchType.EAGER*/)
 	@JoinColumn(name = "typemessage_id")
+	@JsonManagedReference
     private TypeMessage typeMessage;
+	
 	@OneToMany(mappedBy="ticket", targetEntity = StateTicket.class, cascade=CascadeType.ALL /*, fetch = FetchType.EAGER*/) 
-    private Set<StateTicket> states;
+	@JsonBackReference
+	private Set<StateTicket> states;
 	
 	public Integer getId() {
 		return id;

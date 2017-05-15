@@ -15,6 +15,9 @@ import javax.persistence.Table;
 
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name = "users", catalog = "test1")
 public class User {
@@ -25,7 +28,9 @@ public class User {
 	private String username;
 	private String password;
 	private boolean enabled;
+	@JsonBackReference
 	private Set<UserRole> userRole = new HashSet<UserRole>(0);
+	@JsonManagedReference
     private Utilisateur userUtilisateur;
 
 	public User() {

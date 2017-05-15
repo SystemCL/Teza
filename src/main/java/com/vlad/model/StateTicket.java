@@ -8,17 +8,23 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name="stateTicket")
 public class StateTicket {
 	@Id
 	@GeneratedValue
 	private Integer id;
+	
 	@Column(name = "nomStateTicket")
 	private String nomStateTicket;
+	
 	@ManyToOne(/*fetch = FetchType.EAGER*/)
 	@JoinColumn(name = "ticket_id")
+	@JsonManagedReference
     private Ticket ticket;
+	
 	public Integer getId() {
 		return id;
 	}

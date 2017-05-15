@@ -1,5 +1,7 @@
 package com.vlad.tickets.dao;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import org.hibernate.Query;
@@ -103,10 +105,11 @@ public class ProjectDAOImpl implements ProjectDAO {
 		return domain;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Project> getSearchProjects(String text) {
 		// Lista Returneaza NULL
-		FullTextSession fullTextSession = Search.getFullTextSession(getCurrentSession());
+/*		FullTextSession fullTextSession = Search.getFullTextSession(getCurrentSession());
 		QueryBuilder builder = fullTextSession.getSearchFactory()
 				.buildQueryBuilder()
 				.forEntity(Project.class)
@@ -117,16 +120,18 @@ public class ProjectDAOImpl implements ProjectDAO {
 		
 		org.hibernate.search.FullTextQuery ftq =
 				fullTextSession.createFullTextQuery(query, Project.class);
+		System.out.println("======" + ftq.toString());
 		@SuppressWarnings("unchecked")
-		List<Project> projectSearchList = ftq.list();
+		List<Project> projectSearchList = ftq.list();*/
 		
-/*		Query query = sessionFactory.getCurrentSession().createQuery(
+		Query query = sessionFactory.getCurrentSession().createQuery(
 				"Select a FROM Project a WHERE a.nomProject like ?");
 		query.setParameter(0, "%" + text + "%");
 		@SuppressWarnings("unchecked")
-		List<Project> list = query.list();*/
+		List<Project> list = new LinkedList<Project>();
+		list = (List<Project>) query.list();
 		
-		return projectSearchList;
+		return list;
 	}
 
 

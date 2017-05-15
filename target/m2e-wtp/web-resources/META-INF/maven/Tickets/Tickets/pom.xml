@@ -1,13 +1,14 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>Tickets</groupId>
-  <artifactId>Tickets</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
-  <packaging>war</packaging>
-  
-  <properties>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>Tickets</groupId>
+	<artifactId>Tickets</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>war</packaging>
+
+	<properties>
 		<jdk.version>1.6</jdk.version>
-		<spring.version>3.2.8.RELEASE</spring.version>
+		<spring.version>4.0.4.RELEASE</spring.version>
 		<spring.security.version>3.2.3.RELEASE</spring.security.version>
 		<jstl.version>1.2</jstl.version>
 		<mysql.connector.version>5.1.30</mysql.connector.version>
@@ -17,8 +18,8 @@
 		<dbcp.version>1.4</dbcp.version>
 		<servletapi.version>2.5</servletapi.version>
 	</properties>
-  
-  <dependencies>
+
+	<dependencies>
 
 		<!-- database pool -->
 		<dependency>
@@ -46,12 +47,12 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-		
+
 		<dependency>
-            <groupId>joda-time</groupId>
-            <artifactId>joda-time</artifactId>
-            <version>2.9.9</version>
-        </dependency>
+			<groupId>joda-time</groupId>
+			<artifactId>joda-time</artifactId>
+			<version>2.9.9</version>
+		</dependency>
 
 		<!-- Spring MVC -->
 		<dependency>
@@ -133,31 +134,62 @@
 			<version>${servletapi.version}</version>
 			<scope>provided</scope>
 		</dependency>
-		
+
 		<dependency>
-      	 	<groupId>javax.servlet</groupId>
-      		<artifactId>jsp-api</artifactId>
-      	    <version>2.0</version>
-       		<scope>provided</scope>
-       </dependency>
-       
-       <dependency>
-   		    <groupId>org.hibernate</groupId>
-  		    <artifactId>hibernate-search-orm</artifactId>
-   		    <version>4.5.1.Final</version>
-	   </dependency>
-	   <dependency>
-    <groupId>org.duracloud.mill</groupId>
-    <artifactId>manifest-cleaner</artifactId>
-    <version>2.0.18</version>
-</dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jsp-api</artifactId>
+			<version>2.0</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-search-orm</artifactId>
+			<version>4.5.1.Final</version>
+		</dependency>
+		<dependency>
+			<groupId>org.duracloud.mill</groupId>
+			<artifactId>manifest-cleaner</artifactId>
+			<version>2.0.18</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.sun.jersey</groupId>
+			<artifactId>jersey-server</artifactId>
+			<version>1.8</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.sun.jersey.contribs</groupId>
+			<artifactId>jersey-multipart</artifactId>
+			<version>1.8</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-core</artifactId>
+			<version>2.2.3</version>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.2.3</version>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-annotations</artifactId>
+			<version>2.2.3</version>
+		</dependency>
+		<dependency>
+            <groupId>com.fasterxml.jackson.dataformat</groupId>
+            <artifactId>jackson-dataformat-xml</artifactId>
+            <version>2.2.3</version>
+        </dependency> 
 
 	</dependencies>
-  
-  
-  
-  <build>
-    <finalName>Tickets</finalName>
+
+	<build>
+		<finalName>Tickets</finalName>
 		<plugins>
 
 			<plugin>
@@ -190,5 +222,5 @@
 				</configuration>
 			</plugin>
 		</plugins>
-  </build>
+	</build>
 </project>

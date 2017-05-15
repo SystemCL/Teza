@@ -11,16 +11,27 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
 @Table(name="domainProject")
+/*@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@domainId")*/
 public class DomainProject {
 	@Id
 	@GeneratedValue
 	private Integer id;
+	
 	@Column(name = "nameDomain")
 	private String nameDomain;
+	
 	@OneToMany( /*fetch = FetchType.EAGER,*/ mappedBy="domainProject", targetEntity = Project.class, cascade=CascadeType.ALL, fetch=FetchType.EAGER) 
+	@JsonBackReference
 	private Set<Project> projects = new HashSet<Project>(0);
 	
 	public Integer getId() {
@@ -35,6 +46,7 @@ public class DomainProject {
 	public void setNameDomain(String nameDomain) {
 		this.nameDomain = nameDomain;
 	}
+	
 	public Set<Project> getProjects() {
 		return projects;
 	}

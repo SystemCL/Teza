@@ -15,6 +15,10 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
+import com.fasterxml.jackson.annotation.PropertyAccessor;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 @EnableWebMvc
 @Configuration
 @ComponentScan({ "com.vlad.*" })
@@ -22,12 +26,17 @@ import org.springframework.web.servlet.view.JstlView;
 @Import({ SecurityConfig.class })
 public class AppConfig {
 
+
+	
 	@Bean
     public SessionFactory sessionFactory() {
         LocalSessionFactoryBuilder builder = new LocalSessionFactoryBuilder(dataSource());
         builder
         	.scanPackages("com.vlad.model")
             .addProperties(getHibernateProperties());
+    	ObjectMapper mapper = new ObjectMapper();    
+    	mapper.setVisibility(PropertyAccessor.ALL, Visibility.NONE);
+    	mapper.setVisibility(PropertyAccessor.FIELD, Visibility.ANY);
 
         return builder.buildSessionFactory();
     }

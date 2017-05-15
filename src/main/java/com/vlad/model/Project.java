@@ -1,5 +1,6 @@
 package com.vlad.model;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashSet;
@@ -18,43 +19,70 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.UniqueConstraint;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.search.annotations.Field;
+import org.hibernate.search.annotations.Index;
 import org.hibernate.search.annotations.Indexed;
 import org.hibernate.search.annotations.Store;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.core.JsonGenerationException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.vlad.model.Ticket;
 
 @Entity
 @Indexed
 @Table(name="project")
+//@JsonAutoDetect(fieldVisibility = Visibility.ANY, getterVisibility = Visibility.NONE, setterVisibility = Visibility.NONE, creatorVisibility=Visibility.NONE)
 //@Cache(usage=CacheConcurrencyStrategy.READ_WRITE)
+/*@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@projectId")*/
 public class Project extends AbstractTimestampEntity {
 	@Id
 	@GeneratedValue
+	@JsonProperty("id")
 	private Integer id;
-	@Field(store = Store.NO)
+	
+	@Field(store = Store.NO, index=Index.YES)
 	@Column(name = "nomProject")
+	@JsonProperty("nomProject")
 	private String nomProject;
+	
 	@ManyToOne(/*fetch = FetchType.EAGER*/)
 	@JoinColumn(name = "domain_id")
+	@JsonProperty("domainProject")
+	@JsonManagedReference
     private DomainProject domainProject;
+	
 	@Column(name = "dateCreationP", columnDefinition = "TIMESTAMP default CURRENT_TIMESTAMP")
+	@JsonProperty("dateCreationP")
 	private Date dateCreationP;
+	
     @Column(name = "beginninglife1")
+    @JsonProperty("beginninglife1")
     private String beginninglife1;
-
-	/*	@Temporal(TemporalType.DATE)
-	@DateTimeFormat(pattern="yyyy.MM.dd")
-	@Column(name = "dateCreationP")
-	private Date dateCreationP;*/
-	@OneToMany( /*fetch = FetchType.EAGER,*/ mappedBy="project", targetEntity = Ticket.class, cascade=CascadeType.ALL, fetch=FetchType.EAGER) 
-	private Set<Ticket> tickets = new HashSet<Ticket>(0);
-	@OneToMany( /*fetch = FetchType.EAGER,*/ mappedBy="project", targetEntity = UserAssignProject.class, cascade=CascadeType.ALL, fetch=FetchType.EAGER) 
-	private Set<UserAssignProject> userAssignProjects = new HashSet<UserAssignProject>(0);
+    
+    @OneToMany( /*fetch = FetchType.EAGER,*/ mappedBy="project", targetEntity = Ticket.class, cascade=CascadeType.ALL, fetch=FetchType.EAGER) 
+    @JsonBackReference
+    private Set<Ticket> tickets = new HashSet<Ticket>(0);
+    
+    @OneToMany( /*fetch = FetchType.EAGER,*/ mappedBy="project", targetEntity = UserAssignProject.class, cascade=CascadeType.ALL, fetch=FetchType.EAGER) 
+    @JsonBackReference
+    private Set<UserAssignProject> userAssignProjects = new HashSet<UserAssignProject>(0);
 	
 	public Integer getId() {
 		return id;
@@ -148,6 +176,7 @@ public class Project extends AbstractTimestampEntity {
 		this.userAssignProjects = userAssignProjects;
 		return userAssignProjects;
 	}
+	
 	
 	
 }

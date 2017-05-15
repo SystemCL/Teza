@@ -9,6 +9,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 <title>List of utilisateurs</title>
+<style>
+    <%@ include file="table.css"%>
+</style>
 </head>
 <body>
 <h1>List of utilisateurs</h1>

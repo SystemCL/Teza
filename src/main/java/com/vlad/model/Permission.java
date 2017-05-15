@@ -12,6 +12,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name="permission")
 public class Permission {
@@ -19,15 +22,21 @@ public class Permission {
 	@Id
 	@GeneratedValue
 	private Integer id;
+	
 	@Column(name = "nomPermission")
 	private String nomPermission;
+	
 	@Column(name = "bitwise")
 	private String bitwise;
+	
 	@ManyToOne(/*fetch = FetchType.EAGER*/)
 	@JoinColumn(name = "userassignproject_id")
+	@JsonManagedReference
     private UserAssignProject userAssignProject;
+	
 	@OneToMany(mappedBy="permission", targetEntity = Ticket.class, cascade=CascadeType.ALL /*, fetch = FetchType.EAGER*/) 
-    private Set<Ticket> tickets;
+	@JsonBackReference
+	private Set<Ticket> tickets;
 	
 	public Integer getId() {
 		return id;

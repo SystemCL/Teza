@@ -15,6 +15,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.vlad.model.Ticket;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.vlad.model.Project;
 
 @Entity
@@ -23,18 +24,27 @@ public class Utilisateur {
 	@Id
 	@GeneratedValue
 	private Integer id;
+	
 	@Column(name = "firstName")
 	private String firstName;
+	
 	@Column(name = "lastName")
 	private String lastName;
 	private String fullName;
+	
 	@Column(name = "age")
 	private int age;
+	
 	@OneToMany( /*fetch = FetchType.EAGER,*/ mappedBy="utilisateur", targetEntity = Ticket.class, cascade=CascadeType.ALL, fetch=FetchType.EAGER) 
+	@JsonBackReference
 	private Set<Ticket> tickets = new HashSet<Ticket>(0);
+	
 	@OneToMany(mappedBy="utilisateur", targetEntity=UserAssignProject.class, cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@JsonBackReference
 	private Set<UserAssignProject> userAssignProjects = new HashSet<UserAssignProject>(0);
+	
 	@OneToMany(mappedBy="utilisateur", targetEntity=Message.class, cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@JsonBackReference
 	private Set<Message> messages = new HashSet<Message>(0);
 	
 	
