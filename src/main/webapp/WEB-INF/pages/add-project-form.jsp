@@ -38,7 +38,7 @@
 	
 	<tr>
 		  <td>
-			<form:select style="color:dark; font-size:15px; height:33px; width:169px;" path="domainProject.id" enctype="multipart/form-data">
+			<form:select style="color:dark; font-size:15px; height:36px; width:169px; border-radius:7px; border:2px solid #ccc; box-sizing: border-box; font-weight:bolder; color:#686868; " path="domainProject.id" enctype="multipart/form-data">
 				<option value="Select" label=" - Domain - " ></option>
 			       <form:options items="${domainsList}" path="domain_id" itemValue= "id" itemLabel= "nameDomain"></form:options>
 			</form:select>  

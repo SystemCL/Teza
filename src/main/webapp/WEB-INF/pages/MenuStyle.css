@@ -52,8 +52,8 @@ li.dropdown {
 input.header[type=text] {
     width: 130px;
     box-sizing: border-box;
-    border: 3px solid #ccc;
-    border-radius: 15px;
+    border: 1.4px solid #ccc;
+    border-radius: 10px;
     font-size: 15px;
     font-weight: bold;
     background-color: white;

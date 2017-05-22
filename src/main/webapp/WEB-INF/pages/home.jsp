@@ -19,7 +19,20 @@
 ${message}<br/>
 </p>
 <h2 align="center">Welcome to home page: ${pageContext.request.userPrincipal.name}</h2>
-
+<table align="left" border="1">
+	<tr>
+		<td>
+		<p>
+			<a href="https://www.w3schools.com">
+<img border="0" src= "/images/tickets.png" width="200" height="200"/>
+</a>
+</p>
+		</td>
+		<td>
+		123
+		</td>
+	</tr>
+</table>
 
 </body>
 </html>

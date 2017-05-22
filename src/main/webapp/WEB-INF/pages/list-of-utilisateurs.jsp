@@ -8,16 +8,16 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-<title>List of utilisateurs</title>
+<title>List of users</title>
 <style>
     <%@ include file="table.css"%>
 </style>
 </head>
 <body>
-<h1>List of utilisateurs</h1>
+<h1>List of users</h1>
 <jsp:include page="header.jsp" />
 <sec:authorize access="hasRole('ROLE_ADMIN')">
-<p>Here you can see the list of the utilisateurs, edit them or remove.</p>
+<p>Here you can see the list of the users, edit them or remove.</p>
 
 <div style="height:190px;overflow:auto;">
 <table border="2px" cellpadding="0" cellspacing="0" align="center" width="750">

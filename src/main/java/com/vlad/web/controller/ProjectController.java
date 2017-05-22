@@ -47,14 +47,11 @@ import com.vlad.tickets.service.ProjectService;
 @Controller
 @RequestMapping(value="/project")
 @Configuration
-@RestController
 @ComponentScan("com.vlad.tickets.service")
 public class ProjectController {
 
 	@Autowired
 	private ProjectService projectService;
-
-
 	
 	@RequestMapping(value="/add", method=RequestMethod.GET)
 	public ModelAndView addprojectPage(Map<String, Object> map) {
@@ -66,8 +63,6 @@ public class ProjectController {
 		return modelAndView;
 	}
 	
-	@POST
-	@Consumes("application/json")
 	@RequestMapping(value="/add", method=RequestMethod.POST)
 	public ModelAndView addingproject(@ModelAttribute Project project) {
 		
@@ -93,14 +88,6 @@ public class ProjectController {
 		return modelAndView;
 	}
 	
-	/*@RequestMapping(value="/list-projects-json", method=RequestMethod.GET, headers = "Accept=application/json" )
-	public List<Project> listOfprojectsJson() {
-		
-		List<Project> projects = projectService.getProjects();
-		return projects;
-	}*/
-	
-	
 	@RequestMapping(value = "/json", method = RequestMethod.GET, produces = "application/json")
 	public ResponseEntity<String> bar() {
 	    final HttpHeaders httpHeaders= new HttpHeaders();
@@ -108,9 +95,6 @@ public class ProjectController {
 	    return new ResponseEntity<String>("{\"test\": \"jsonResponseExample\"}", httpHeaders, HttpStatus.OK);
 	}
 	
-	@PUT
-	@Path("/edit/{id}")
-	@Consumes("application/json")
 	@RequestMapping(value="/edit/{id}", method=RequestMethod.GET)
 	public ModelAndView editprojectPage(@PathVariable Integer id, Map<String, Object> map) {
 		ModelAndView modelAndView = new ModelAndView("edit-project-form");
@@ -135,8 +119,6 @@ public class ProjectController {
 		return modelAndView;
 	}
 	
-	@DELETE
-	@Path("/delete/{id}")
 	@RequestMapping(value="/delete/{id}", method=RequestMethod.GET)
 	public ModelAndView deleteproject(@PathVariable Integer id) {
 		ModelAndView modelAndView = new ModelAndView("home");
@@ -152,18 +134,6 @@ public class ProjectController {
 		List<Project> pSearchResult = projectService.getSearchProjects(pSearchTerm);
 		modelAndView.addObject("searchTerm", pSearchTerm);
 		modelAndView.addObject("searchResult", pSearchResult);
-		
-		/*List<Project> searchResults = null;
-	    try {
-	      searchResults = projectService.getSearchProjects(q);
-	    }
-	    catch (Exception ex) {
-	      // here you should handle unexpected errors
-	      // ...
-	      // throw ex;
-	    }
-	    //model.addAttribute("searchResults", searchResults);
-	    model.addAttribute("projectsSearch", searchResults);*/
 		request.setAttribute("searchResult",pSearchResult);
 	    return modelAndView;
 	  }

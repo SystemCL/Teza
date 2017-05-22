@@ -35,7 +35,7 @@
   		<form:input class="info" placeholder="Ticket name" path="nomTicket" required="required"/> 
   	</td>
   	<td>
- 	    <form:select style="color:dark; font-size:15px; height:33px; width:169px;"  class="info" path="utilisateur.id" enctype="multipart/form-data">
+ 	    <form:select style="color:dark; font-size:15px; height:33px; width:169px; border-radius:7px; border:2px solid #ccc; box-sizing: border-box; height:41px;"  class="info" path="utilisateur.id" enctype="multipart/form-data">
 	      <option value="Select" label=" - User - " ></option>
                <form:options items="${utilisateursList}" path="utilisateur_id" itemValue= "id" itemLabel= "fullName"></form:options>
           </form:select>   
@@ -46,10 +46,10 @@
   <tr>
   		<fmt:formatDate value="${cForm.dateCreationT}" pattern="yyyy-MM-dd" var="formattedDate"/>
 	<td>
-		<form:input style="color:dark; font-size:15px; height:33px; width:165px;" type="date" placeholder="Creation date" path="dateCreationT" name = "dateCreationT" value = "${formattedDate}" />
+		<form:input style="color:dark; font-size:15px; height:33px; width:170px; border-radius:7px; border:2px solid #ccc; box-sizing: border-box; height:41px;" type="date" placeholder="Creation date" path="dateCreationT" name = "dateCreationT" value = "${formattedDate}" />
 	</td>
   	<td>
-  		<form:select style="color:dark; font-size:15px; height:33px; width:169px;" path="project.id" enctype="multipart/form-data">
+  		<form:select style="color:dark; font-size:15px; height:33px; width:169px; border-radius:7px; border:2px solid #ccc; box-sizing: border-box; height:41px;" path="project.id" enctype="multipart/form-data">
 	        <option value="Select" label=" - Project - " ></option>
                  <form:options items="${projectsList}" path="project_id" itemValue= "id" itemLabel= "nomProject"></form:options>
             </form:select>  
@@ -61,7 +61,7 @@
   		<form:input placeholder="Subject" class="info" path="sujetTicket" required="required"/>
   	</td>
   	<td>
-  		<form:select style="color:dark; font-size:15px; height:33px; width:169px;" path="permission.id" enctype="multipart/form-data">
+  		<form:select style="color:dark; font-size:15px; height:33px; width:169px; border-radius:7px; border:2px solid #ccc; box-sizing: border-box; height:41px;" path="permission.id" enctype="multipart/form-data">
 	        <option value="Select" label=" - Permission - " ></option>
                  <form:options items="${permissionsList}" path="permission_id" itemValue= "id" itemLabel= "nomPermission"></form:options>
             </form:select>
@@ -73,7 +73,7 @@
   	<td>
   	</td>
   	<td>
-  		<form:select style="color:dark; font-size:15px; height:33px; width:169px;" path="priority.id" enctype="multipart/form-data">
+  		<form:select style="color:dark; font-size:15px; height:33px; width:169px; border-radius:7px; border:2px solid #ccc; box-sizing: border-box; height:41px;" path="priority.id" enctype="multipart/form-data">
 	        <option value="Select" label=" - Priority - " ></option>
                  <form:options items="${prioritiesList}" path="priority_id" itemValue= "id" itemLabel= "nomPriority"></form:options>
             </form:select>

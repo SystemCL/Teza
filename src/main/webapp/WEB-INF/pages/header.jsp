@@ -34,10 +34,10 @@
    </li>
    
    <li class="dropdown">
-     <a href="${pageContext.request.contextPath}/utilisateur/list.html" class="dropbtn">Utilisateurs</a>
+     <a href="${pageContext.request.contextPath}/utilisateur/list.html" class="dropbtn">Users</a>
        <div class="dropdown-content">
-          <a href="${pageContext.request.contextPath}/utilisateur/add.html">Add Utilisateur</a>
-          <a href="${pageContext.request.contextPath}/utilisateur/list.html">Utilisateurs List</a>
+          <a href="${pageContext.request.contextPath}/utilisateur/add.html">Add User</a>
+          <a href="${pageContext.request.contextPath}/utilisateur/list.html">User List</a>
        </div>
    </li>
 

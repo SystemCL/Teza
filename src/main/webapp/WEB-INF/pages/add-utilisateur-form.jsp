@@ -11,18 +11,18 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-<title>Add utilisateur page</title>
+<title>Add user page</title>
 <style>
      <%@ include file="MenuStyle.css"%>
      
 </style>
 </head>
 <body>
-<h1>Add utilisateur page</h1>
+<h1>Add user page</h1>
 <jsp:include page="header.jsp" />
 
 <sec:authorize access="hasRole('ROLE_ADMIN')">
-<p>Here you can add a new utilisateur.</p>
+<p>Here you can add a new user.</p>
 
 <form:form method="POST" commandName="utilisateur" action="${pageContext.request.contextPath}/utilisateur/add.html">
 <h2 align="center">Fill utilisateur details</h2>
@@ -55,10 +55,10 @@
 </form:form>
 </sec:authorize>
 <sec:authorize access="hasRole('ROLE_USER')">
-  <h3>Only Admin can add new utilisateurs!</h3>
+  <h3>Only Admin can add new users!</h3>
 </sec:authorize>
 <sec:authorize access="isAnonymous()">
-<br/><h3 style="padding-left: 20px;">For add new utilisateurs, please login first</h3>
+<br/><h3 style="padding-left: 20px;">For add new users, please login first</h3>
 </sec:authorize>
 
 
