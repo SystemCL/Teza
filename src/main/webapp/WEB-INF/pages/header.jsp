@@ -40,6 +40,7 @@
           <a href="${pageContext.request.contextPath}/utilisateur/list.html">User List</a>
        </div>
    </li>
+   
 
 <c:if test="${pageContext.request.userPrincipal.name != null}">
 <li><a style="padding-right:20px" class="active" onclick="return confirm('Are you sure you want to LogOut?')" href="${pageContext.request.contextPath}/logout">Logout</a></li>
@@ -53,9 +54,11 @@
 <form id="searchForm" action="search">
   <input class="header" id="searchString" name="searchTerm" type="text" placeholder="Search.."> <!-- name="name"  -->
 </form> 
-
  </ul>
  
+<%-- <p align="right" style="position:relative;">
+     <%= new java.util.Date() %>
+</p> --%>
 
 </body>
 </html>

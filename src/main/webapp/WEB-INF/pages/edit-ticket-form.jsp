@@ -21,7 +21,7 @@
 </style>
 </head>
 <body>
-	<h1>Edit ticket page</h1>
+	<h2>Edit ticket page</h2>
 	<jsp:include page="header.jsp" />
 	<h2 align="center">Edit ticket details</h2>
 	<p>${message}</p>

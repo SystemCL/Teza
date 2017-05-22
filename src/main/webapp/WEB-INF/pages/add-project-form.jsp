@@ -21,7 +21,7 @@
 
 </head>
 <body>
-<h1>Add project page</h1>
+<h2>Add project page</h2>
 <jsp:include page="header.jsp" />
 
 <sec:authorize access="hasRole('ROLE_ADMIN')">

@@ -170,4 +170,34 @@ select[type=text] {
     background-color: #4CAF50;
     color: white;
 }
- 
+
+.linked {
+    width:50%;
+    border-collapse:collapse;
+}
+
+
+td.proj:hover, td.proj:active {
+	background: #31708F;
+}
+
+td.tick:hover, td.tick:active {
+	background: #99FF99;
+}
+
+img {
+	max-width: 100%;
+    height: auto;
+}
+
+/*
+.linked2 {
+    background-color: white; 
+    color: black; 
+    border: 1px solid #C2F29E;
+}
+
+.linked2:hover {
+	background-color: #C2F29E;
+    color: white;
+} */

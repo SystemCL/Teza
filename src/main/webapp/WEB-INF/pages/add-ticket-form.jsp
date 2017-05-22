@@ -15,7 +15,7 @@
 <title>Add ticket page</title>
 </head>
 <body>
-<h1>Add ticket page</h1>
+<h2>Add ticket page</h2>
 <jsp:include page="header.jsp" />
 
 <sec:authorize access="hasRole('ROLE_ADMIN')">

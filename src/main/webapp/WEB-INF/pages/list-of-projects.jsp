@@ -17,7 +17,7 @@
 </style>
 </head>
 <body>
-<h1>List of projects</h1>
+<h2>List of projects</h2>
 <jsp:include page="header.jsp" />
 <p>Here you can see the list of the projects, edit them or remove.</p>
 

@@ -20,7 +20,7 @@
 </style>
 </head>
 <body>
-	<h1>Edit project page</h1>
+	<h2>Edit project page</h2>
 	<jsp:include page="header.jsp" />
 	<h2 align="center">Edit project details</h2>
 	<p>${message}</p>

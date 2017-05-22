@@ -14,7 +14,7 @@
 </style>
 </head>
 <body>
-<h1>List of users</h1>
+<h2>List of users</h2>
 <jsp:include page="header.jsp" />
 <sec:authorize access="hasRole('ROLE_ADMIN')">
 <p>Here you can see the list of the users, edit them or remove.</p>

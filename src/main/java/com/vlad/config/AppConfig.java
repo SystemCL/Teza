@@ -13,6 +13,7 @@ import org.springframework.orm.hibernate4.LocalSessionFactoryBuilder;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 
@@ -25,7 +26,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @ComponentScan({ "com.vlad.*" })
 @EnableTransactionManagement
 @Import({ SecurityConfig.class })
-public class AppConfig {
+public class AppConfig extends WebMvcConfigurerAdapter {
 
 
 	
@@ -81,7 +82,9 @@ public class AppConfig {
 		return viewResolver;
 	}
 	
-	public void addResourceHandlers(final ResourceHandlerRegistry registry) {
-	    registry.addResourceHandler("/images/**").addResourceLocations("/WEB-INF/pages/images/").setCachePeriod(10000);
+	@Override
+	public void addResourceHandlers(ResourceHandlerRegistry registry) {
+	    registry.addResourceHandler("/resources/**").addResourceLocations("/resources/").setCachePeriod(10000);
+	    registry.addResourceHandler("/javascript/**").addResourceLocations("/javascript/");
 	}
 }

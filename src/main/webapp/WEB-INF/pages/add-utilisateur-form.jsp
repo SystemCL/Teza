@@ -18,7 +18,7 @@
 </style>
 </head>
 <body>
-<h1>Add user page</h1>
+<h2>Add user page</h2>
 <jsp:include page="header.jsp" />
 
 <sec:authorize access="hasRole('ROLE_ADMIN')">
