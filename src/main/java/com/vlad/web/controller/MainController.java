@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -22,12 +23,16 @@ import org.springframework.web.servlet.ModelAndView;
 import com.vlad.model.User;
 import com.vlad.model.Utilisateur;
 import com.vlad.tickets.dao.UserDaoImpl;
+import com.vlad.tickets.service.UserService;
+import com.vlad.tickets.service.UtilisateurService;
 
 @Controller
 public class MainController {
 
 	@Autowired
-	private UserDaoImpl userDAOImpl;
+	private UserService userService;
+	
+	
 	
 	@RequestMapping(value = { "/", "/welcome**" }, method = RequestMethod.GET)
 	public ModelAndView defaultPage() {
@@ -60,7 +65,7 @@ public class MainController {
 	
 	@RequestMapping(value="/registration", method = RequestMethod.GET)
 	public ModelAndView registrationPage(){
-		ModelAndView modelAndView = new ModelAndView("register-user-form");
+		ModelAndView modelAndView = new ModelAndView("login");
 		modelAndView.addObject("user", new User());
 		return modelAndView;
 		
@@ -69,7 +74,7 @@ public class MainController {
 	@RequestMapping(value="/registration", method=RequestMethod.POST)
 	public ModelAndView registrationUser(@ModelAttribute User user){
 		ModelAndView modelAndView = new ModelAndView("home");
-		userDAOImpl.save(user);
+		userService.save(user);
 		String message = "User was successfully registered";
 		modelAndView.addObject("message", message);
 		return modelAndView;

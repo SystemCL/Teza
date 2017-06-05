@@ -8,6 +8,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -22,8 +23,9 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 @Table(name = "users", catalog = "test1")
 public class User {
 
-	@Id
-	@GeneratedValue
+/*	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="id", unique=true, nullable=false)*/
 	private Integer id;
 	private String username;
 	private String password;
@@ -51,7 +53,7 @@ public class User {
 	}
 
 	public Integer getId() {
-		return id;
+		return this.id;
 	}
 
 	public void setId(Integer id) {
@@ -97,7 +99,7 @@ public class User {
 		this.userRole = userRole;
 	}
 	
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	public Utilisateur getUserUtilisateur() {
 		return userUtilisateur;
 	}
@@ -105,5 +107,6 @@ public class User {
 	public void setUserUtilisateur(Utilisateur userUtilisateur) {
 		this.userUtilisateur = userUtilisateur;
 	}
+
 
 }

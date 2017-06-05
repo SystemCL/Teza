@@ -1,4 +1,5 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
@@ -21,7 +22,7 @@
 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 
 </head>
-<body onload='document.loginForm.username.focus();'>
+<body onload='document.login.username.focus();'>
 <div class="form">
       
       <ul class="tab-group">
@@ -35,41 +36,28 @@
           
           <h1>Sign Up for Free</h1>
           
-          <form action="/" method="post">
+          <form:form action="${pageContext.request.contextPath}/registration.html" method="POST" commandName="user">
           
           <div class="top-row">
             <div class="field-wrap">
               <label>
-                First Name<span class="req">*</span>
+                Username<span class="req">*</span>
               </label>
               <input type="text" required autocomplete="off" />
             </div>
         
             <div class="field-wrap">
               <label>
-                Last Name<span class="req">*</span>
+                Password<span class="req">*</span>
               </label>
-              <input type="text" required autocomplete="off"/>
+              <input type="password" required autocomplete="off"/>
             </div>
           </div>
 
-          <div class="field-wrap">
-            <label>
-              Email Address<span class="req">*</span>
-            </label>
-            <input type="email"required autocomplete="off"/>
-          </div>
-          
-          <div class="field-wrap">
-            <label>
-              Set A Password<span class="req">*</span>
-            </label>
-            <input type="password"required autocomplete="off"/>
-          </div>
           
           <button type="submit" class="button button-block">Get Started</button>
-          
-          </form>
+          <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+          </form:form>
 		
         </div>
         

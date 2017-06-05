@@ -17,6 +17,9 @@ public class UserDaoImpl implements UserDao {
 	@Autowired
 	private SessionFactory sessionFactory;
 	
+	private Session getCurrentSession() {
+		return sessionFactory.getCurrentSession();
+	}
 
 	@SuppressWarnings("unchecked")
 	public User findByUserName(String username) {
@@ -36,10 +39,26 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	public void save(User user) {
-		Session session = sessionFactory.getCurrentSession();
+		//Session session = sessionFactory.getCurrentSession();
+		Utilisateur utilisateur = new Utilisateur();
+		UserRole userRole = new UserRole();
+/*		user.setUsername(user.getUsername());
 		user.setPassword(user.getPassword()); //bCryptPasswordEncoder.encode(...)
-		session.save(user);
-		session.flush();
+		user.setEnabled(true);*/
+		/*session.save(user);*/
+		//utilisateur.setId(user.getId());
+		userRole.setUserRoleId(user.getId());
+		user.setId(user.getId());
+		user.setUsername(user.getUsername());
+		user.setPassword(user.getPassword()); //bCryptPasswordEncoder.encode(...)
+		user.setEnabled(true);
+		userRole.setUser(user);
+		
+		
+		
+		
+		getCurrentSession().save(user);
+		//session.flush();
 		
 	}
 

@@ -4,9 +4,9 @@ import com.vlad.model.*;
 
 public interface UserDao {
 	
-	void save(User user);
+	public void save(User user);
 
-	User findByUserName(String username);
+	public User findByUserName(String username);
 	
 
 
