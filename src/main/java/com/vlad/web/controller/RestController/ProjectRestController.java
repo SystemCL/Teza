@@ -27,7 +27,7 @@ public class ProjectRestController {
 	@Autowired
 	private ProjectService projectService;
 
-	@RequestMapping(value = "/project/{id}", method = RequestMethod.GET, headers = "Accept=application/json")
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET, headers = "Accept=application/json")
 	public Project getProjectById(@PathVariable int id) {
 		return projectService.getProject(id);
 	}

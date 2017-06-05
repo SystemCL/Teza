@@ -6,6 +6,7 @@ import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Repository;
 
 import com.vlad.model.*;
@@ -15,6 +16,7 @@ public class UserDaoImpl implements UserDao {
 
 	@Autowired
 	private SessionFactory sessionFactory;
+	
 
 	@SuppressWarnings("unchecked")
 	public User findByUserName(String username) {
@@ -35,7 +37,7 @@ public class UserDaoImpl implements UserDao {
 	@Override
 	public void save(User user) {
 		Session session = sessionFactory.getCurrentSession();
-		user.setPassword(user.getPassword()); //passwordEncoder.encode(user.getPassword())
+		user.setPassword(user.getPassword()); //bCryptPasswordEncoder.encode(...)
 		session.save(user);
 		session.flush();
 		

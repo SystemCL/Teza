@@ -22,7 +22,7 @@ public class TicketRestController {
 	@Autowired
 	private TicketService ticketService;
 	
-	@RequestMapping(value = "/ticket/{id}", method = RequestMethod.GET, headers = "Accept=application/json")
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET, headers = "Accept=application/json")
 	public Ticket getTicketById(@PathVariable int id) {
 		return ticketService.getTicket(id);
 	}

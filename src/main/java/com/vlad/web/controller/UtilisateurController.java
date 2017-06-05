@@ -51,7 +51,7 @@ public class UtilisateurController {
 	 public ModelAndView addingUtilisateur(@ModelAttribute Utilisateur utilisateur) {
 		 ModelAndView modelAndView = new ModelAndView("home");
 		 utilisateurService.addUtilisateur(utilisateur);
-		 String message = "Utilisateur was successfully added.";
+		 String message = "User was successfully added.";
 		 modelAndView.addObject("message", message );
 		 
 		 return modelAndView;

@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.hibernate.Session;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.LockedException;
@@ -11,14 +12,23 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.vlad.model.User;
+import com.vlad.model.Utilisateur;
+import com.vlad.tickets.dao.UserDaoImpl;
 
 @Controller
 public class MainController {
 
+	@Autowired
+	private UserDaoImpl userDAOImpl;
+	
 	@RequestMapping(value = { "/", "/welcome**" }, method = RequestMethod.GET)
 	public ModelAndView defaultPage() {
 
@@ -47,6 +57,25 @@ public class MainController {
 		return new ModelAndView("home");
 	}
 
+	
+	@RequestMapping(value="/registration", method = RequestMethod.GET)
+	public ModelAndView registrationPage(){
+		ModelAndView modelAndView = new ModelAndView("register-user-form");
+		modelAndView.addObject("user", new User());
+		return modelAndView;
+		
+	}
+	
+	@RequestMapping(value="/registration", method=RequestMethod.POST)
+	public ModelAndView registrationUser(@ModelAttribute User user){
+		ModelAndView modelAndView = new ModelAndView("home");
+		userDAOImpl.save(user);
+		String message = "User was successfully registered";
+		modelAndView.addObject("message", message);
+		return modelAndView;
+		
+	}
+	
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public ModelAndView login(@RequestParam(value = "error", required = false) String error,
 			@RequestParam(value = "logout", required = false) String logout, HttpServletRequest request) {

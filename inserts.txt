@@ -14,9 +14,11 @@ INSERT INTO `domainproject` (`id`, `nameDomain`) VALUES ('4', 'Economie');
 
 INSERT INTO `project` (`id`, `beginninglife1`, `updated`, `nomProject`, `domain_id`, `dateCreationP`) VALUES ('1', NULL, CURRENT_TIMESTAMP, 'E-Learning', '3', CURRENT_TIMESTAMP);
 INSERT INTO `project` (`id`, `beginninglife1`, `updated`, `nomProject`, `domain_id`, `dateCreationP`) VALUES ('2', NULL, CURRENT_TIMESTAMP, 'Product Management', '4', CURRENT_TIMESTAMP);
+INSERT INTO `project` (`id`, `beginninglife1`, `updated`, `nomProject`, `domain_id`, `dateCreationP`) VALUES ('3', NULL, CURRENT_TIMESTAMP, 'ATC Simulation', '1', CURRENT_TIMESTAMP);
 
 INSERT INTO `userassignproject` (`id`, `dateCreationUserAssignProject`, `project_id`, `utilisateur_id`) VALUES ('1', '2017-04-27', '1', '2');
 INSERT INTO `userassignproject` (`id`, `dateCreationUserAssignProject`, `project_id`, `utilisateur_id`) VALUES ('2', '2017-04-27', '2', '2');
+INSERT INTO `userassignproject` (`id`, `dateCreationUserAssignProject`, `project_id`, `utilisateur_id`) VALUES ('3', '2017-04-27', '3', '2');
 
 INSERT INTO `permission` (`id`, `bitwise`, `nomPermission`, `userassignproject_id`) VALUES ('1', '2', 'FULL', '2');
 INSERT INTO `permission` (`id`, `bitwise`, `nomPermission`, `userassignproject_id`) VALUES ('2', '4', 'MEDIUM', '1');
@@ -30,6 +32,7 @@ INSERT INTO `typemessage` (`id`, `nomTypeMessage`) VALUES ('3', 'UserMessage');
 
 INSERT INTO `ticket` (`id`, `created`, `updated`, `dateCreationT`, `nomTicket`, `sujetTicket`, `permission_id`, `priority_id`, `project_id`, `typemessage_id`, `utilisateur_id`) VALUES ('1', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'Ticket_1', 'SubjectTicket1', '1', '2', '2', '2', '2');
 INSERT INTO `ticket` (`id`, `created`, `updated`, `dateCreationT`, `nomTicket`, `sujetTicket`, `permission_id`, `priority_id`, `project_id`, `typemessage_id`, `utilisateur_id`) VALUES ('2', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'Ticket_2', 'SubjectTicket_2', '1', '1', '1', '1', '1');
+INSERT INTO `ticket` (`id`, `created`, `updated`, `dateCreationT`, `nomTicket`, `sujetTicket`, `permission_id`, `priority_id`, `project_id`, `typemessage_id`, `utilisateur_id`) VALUES ('3', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'Ticket_3', 'SubjectTicket_3', '2', '2', '3', '2', '2');
 
 INSERT INTO `stateticket` (`id`, `nomStateTicket`, `ticket_id`) VALUES ('1', 'Open', '1');
 INSERT INTO `stateticket` (`id`, `nomStateTicket`, `ticket_id`) VALUES ('2', 'In pending', '2');

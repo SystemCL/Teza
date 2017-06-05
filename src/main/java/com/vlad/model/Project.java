@@ -46,7 +46,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.vlad.model.Ticket;
 
 @Entity
-@Indexed
 @Table(name="project")
 //@JsonAutoDetect(fieldVisibility = Visibility.ANY, getterVisibility = Visibility.NONE, setterVisibility = Visibility.NONE, creatorVisibility=Visibility.NONE)
 //@Cache(usage=CacheConcurrencyStrategy.READ_WRITE)
@@ -57,7 +56,7 @@ public class Project extends AbstractTimestampEntity {
 	@JsonProperty("id")
 	private Integer id;
 	
-	@Field(store = Store.NO, index=Index.YES)
+	//@Field(store = Store.NO, index=Index.YES)
 	@Column(name = "nomProject")
 	@JsonProperty("nomProject")
 	private String nomProject;

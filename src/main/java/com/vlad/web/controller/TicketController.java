@@ -91,7 +91,6 @@ public class TicketController {
 		List<Utilisateur> utilisateurs = ticketService.getUtilisateurs();
 		List<Permission> permissions = ticketService.getPermissions();
 		List<Priority> priorities = ticketService.getPriorities();
-		// Hibernate.initialize(addressService.);
 		map.put("ticket", new Ticket());
 		Ticket ticket = ticketService.getTicket(id);
 		modelAndView.addObject("utilisateursList", utilisateurs);
