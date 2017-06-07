@@ -17,7 +17,8 @@ import javax.persistence.Table;
 
 import com.vlad.model.Ticket;
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.vlad.model.Project;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
 @Table(name="utilisateur")
@@ -48,7 +49,11 @@ public class Utilisateur {
 	@JsonBackReference
 	private Set<Message> messages = new HashSet<Message>(0);
 	
-	
+/*	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "domain_id")
+	@JsonProperty("domainProject")
+	@JsonManagedReference
+    private DomainProject domainProject;*/
 
 	public Integer getId() {
 		return id;
@@ -80,6 +85,7 @@ public class Utilisateur {
 	}
 	
 	public void setFullName(String fullName) {
+		fullName = firstName + " " + lastName; 
 		this.fullName = fullName;
 	}
 	

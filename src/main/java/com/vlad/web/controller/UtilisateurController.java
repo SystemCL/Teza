@@ -5,6 +5,7 @@ import java.util.Map;
 
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceContextType;
+import javax.servlet.http.HttpServletRequest;
 
 import org.hibernate.Hibernate;
 import org.hibernate.annotations.FilterDef;
@@ -19,8 +20,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.vlad.model.DomainProject;
 import com.vlad.model.Project;
+import com.vlad.model.UserAssignProject;
+import com.vlad.model.UserRole;
 import com.vlad.model.Utilisateur;
+import com.vlad.tickets.service.ProjectService;
+import com.vlad.tickets.service.UserAssignProjectService;
+import com.vlad.tickets.service.UserService;
 import com.vlad.tickets.service.UtilisateurService;
 
 @Controller
@@ -35,12 +42,21 @@ public class UtilisateurController {
 	@Autowired
 	private UtilisateurService utilisateurService;
 	
+	@Autowired 
+	private UserService userService;
+	
+	@Autowired
+	private ProjectService projectService;
+	
+    @Autowired
+    private UserAssignProjectService userAssignProjectService;
+	
 	 @RequestMapping(value="/add", method=RequestMethod.GET)
-	 public ModelAndView addUtilisateurPage(/*Map<String, Object> map*/) {
+	 public ModelAndView addUtilisateurPage(Map<String, Object> map) {
 		 ModelAndView modelAndView = new ModelAndView("add-utilisateur-form");
-		// List<Project> projects = utilisateurService.getProjects();
-		 //map.put("utilisateur", new Utilisateur());
-		// modelAndView.addObject("projectsList", projects);
+		 //List<UserRole> userRoles = userService.getSearchRoles();
+		 
+		// modelAndView.addObject("userRolesList", userRoles);
 		 modelAndView.addObject("utilisateur", new Utilisateur());
 		 
 		 return modelAndView;
@@ -48,8 +64,10 @@ public class UtilisateurController {
 	
 	
 	 @RequestMapping(value="/add", method=RequestMethod.POST)
-	 public ModelAndView addingUtilisateur(@ModelAttribute Utilisateur utilisateur) {
+	 public ModelAndView addingUtilisateur(@ModelAttribute Utilisateur utilisateur, HttpServletRequest request) {
 		 ModelAndView modelAndView = new ModelAndView("home");
+		 String fullname = request.getParameter("firstName") + " " + request.getParameter("lastName");
+		 utilisateur.setFullName(fullname);
 		 utilisateurService.addUtilisateur(utilisateur);
 		 String message = "User was successfully added.";
 		 modelAndView.addObject("message", message );
@@ -102,6 +120,31 @@ public class UtilisateurController {
 		
 		 return modelAndView;
 	 }
+	 
+/*	 @RequestMapping(value="/assign-user-project", method=RequestMethod.GET)
+	 public ModelAndView assignUserToProjectPage(Map<String, Object> map@ModelAttribute UserAssignProject userAssignProject){
+		 ModelAndView modelAndView = new ModelAndView("assign-user-project");
+		 List<Project> projects = projectService.getAllProjects();
+		 List<Utilisateur> utilisateurs = utilisateurService.getUtilisateurs();
+		 map.put("assignuserproject", new UserAssignProject());
+		 modelAndView.addObject("projectsList", projects);
+		 modelAndView.addObject("utilisateursList", utilisateurs);
+		 modelAndView.addObject("assignuserproject", new UserAssignProject());
+		 return modelAndView;
+		 
+	 }
+	 
+	 @RequestMapping(value="/assign-user-project", method=RequestMethod.POST)
+	 public ModelAndView assignUserToProject(@ModelAttribute UserAssignProject userAssignProject){
+		 ModelAndView modelAndView = new ModelAndView("home");
+			userAssignProjectService.addUserAssignProject(userAssignProject);
+			
+			String message = "User has been successfully assigned to project.";
+			modelAndView.addObject("message", message);
+			
+			return modelAndView;
+		 
+	 }*/
 
 
 }

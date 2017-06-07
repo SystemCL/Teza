@@ -134,5 +134,12 @@ public class ProjectDAOImpl implements ProjectDAO {
 		return list;
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Project> getAllProjects() {
+		return getCurrentSession().createQuery("from Project").list();
+		
+	}
+
 
 }

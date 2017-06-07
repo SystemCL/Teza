@@ -10,6 +10,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -26,12 +27,19 @@ public class User {
 /*	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="id", unique=true, nullable=false)*/
+/*	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="id", unique=true, nullable=false, updatable=false)*/
+	@Id
+	@GeneratedValue(strategy = GenerationType.TABLE)
 	private Integer id;
 	private String username;
 	private String password;
 	private boolean enabled;
 	@JsonBackReference
 	private Set<UserRole> userRole = new HashSet<UserRole>(0);
+	@OneToOne(cascade={CascadeType.ALL}, fetch = FetchType.LAZY, targetEntity = Utilisateur.class)
+	@JoinColumn(name="userUtilisateur")
 	@JsonManagedReference
     private Utilisateur userUtilisateur;
 
@@ -39,6 +47,13 @@ public class User {
 	}
 
 	public User(String username, String password, boolean enabled) {
+		this.username = username;
+		this.password = password;
+		this.enabled = enabled;
+	}
+	
+	public User(Integer id, String username, String password, boolean enabled) {
+		this.id = id;
 		this.username = username;
 		this.password = password;
 		this.enabled = enabled;
@@ -53,9 +68,8 @@ public class User {
 	}
 
 	public Integer getId() {
-		return this.id;
+		return id;
 	}
-
 	public void setId(Integer id) {
 		this.id = id;
 	}

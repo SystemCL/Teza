@@ -21,7 +21,7 @@
 <h2>Add user page</h2>
 <jsp:include page="header.jsp" />
 
-<sec:authorize access="hasRole('ROLE_ADMIN')">
+<sec:authorize access="hasRole('ROLE_ADMIN') OR isAuthenticated()">
 <p>Here you can add a new user.</p>
 
 <form:form method="POST" commandName="utilisateur" action="${pageContext.request.contextPath}/utilisateur/add.html">

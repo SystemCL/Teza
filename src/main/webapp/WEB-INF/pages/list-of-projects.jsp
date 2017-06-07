@@ -106,7 +106,7 @@ function submitSearchForm() {
 	
 } %>      
 
-
+<p><a href="${pageContext.request.contextPath}/assign-user-project.html">Assign user to project</a></p>
 
 <strong><a href="${pageContext.request.contextPath}/index.html">Back to page</a></strong>
 

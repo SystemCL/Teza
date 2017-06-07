@@ -63,4 +63,10 @@ public class ProjectServiceImpl implements ProjectService {
 		return projectDAO.getSearchProjects(text);
 	}
 
+	@Override
+	public List<Project> getAllProjects() {
+		// TODO Auto-generated method stub
+		return projectDAO.getAllProjects();
+	}
+
 }

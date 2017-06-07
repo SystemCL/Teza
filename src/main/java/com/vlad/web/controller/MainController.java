@@ -63,17 +63,28 @@ public class MainController {
 	}
 
 	
-	@RequestMapping(value="/registration", method = RequestMethod.GET)
+/*	@RequestMapping(value="/registration", method = RequestMethod.GET)
 	public ModelAndView registrationPage(){
 		ModelAndView modelAndView = new ModelAndView("login");
 		modelAndView.addObject("user", new User());
 		return modelAndView;
 		
-	}
+	}*/
 	
 	@RequestMapping(value="/registration", method=RequestMethod.POST)
-	public ModelAndView registrationUser(@ModelAttribute User user){
+	public ModelAndView registrationUser(@ModelAttribute User user, HttpServletRequest request){
 		ModelAndView modelAndView = new ModelAndView("home");
+		//modelAndView.addObject("user", new User());
+		/*String username = request.getParameter("username");
+		String password = request.getParameter("password");
+		modelAndView.addObject("username", request.getParameter("username"));
+		modelAndView.addObject("password", request.getParameter("password"));
+		this.username = username;
+		this.password = password;
+		this.enabled = enabled;
+		this.userRole = userRole;
+		
+		user = new User(username,password, true);*/
 		userService.save(user);
 		String message = "User was successfully registered";
 		modelAndView.addObject("message", message);

@@ -36,21 +36,21 @@
           
           <h1>Sign Up for Free</h1>
           
-          <form:form action="${pageContext.request.contextPath}/registration.html" method="POST" commandName="user">
+          <form:form method="POST" commandName="user" action="${pageContext.request.contextPath}/registration.html" >
           
           <div class="top-row">
             <div class="field-wrap">
               <label>
                 Username<span class="req">*</span>
               </label>
-              <input type="text" required autocomplete="off" />
+              <input type="text" name="username" required autocomplete="off" />
             </div>
         
             <div class="field-wrap">
               <label>
                 Password<span class="req">*</span>
               </label>
-              <input type="password" required autocomplete="off"/>
+              <input type="password" name="password" required autocomplete="off"/>
             </div>
           </div>
 

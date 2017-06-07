@@ -2,6 +2,7 @@ package com.vlad.tickets.dao;
 
 import java.util.List;
 
+import com.vlad.model.UserRole;
 import com.vlad.model.Utilisateur;
 
 

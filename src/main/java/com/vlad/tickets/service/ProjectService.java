@@ -11,6 +11,7 @@ public interface ProjectService {
 	public Project getProject(int id);
 	public void deleteProject(int id);
 	public List<Project> getProjects();
+	public List<Project> getAllProjects();
 	public List<DomainProject> getDomains();
 	public DomainProject getDomain(int id);
 	public List<Project> getSearchProjects(String text);

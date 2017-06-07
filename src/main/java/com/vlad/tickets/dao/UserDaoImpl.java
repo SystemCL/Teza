@@ -3,8 +3,11 @@ package com.vlad.tickets.dao;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Repository;
@@ -41,25 +44,46 @@ public class UserDaoImpl implements UserDao {
 	public void save(User user) {
 		//Session session = sessionFactory.getCurrentSession();
 		Utilisateur utilisateur = new Utilisateur();
-		UserRole userRole = new UserRole();
-/*		user.setUsername(user.getUsername());
-		user.setPassword(user.getPassword()); //bCryptPasswordEncoder.encode(...)
-		user.setEnabled(true);*/
-		/*session.save(user);*/
-		//utilisateur.setId(user.getId());
-		userRole.setUserRoleId(user.getId());
-		user.setId(user.getId());
-		user.setUsername(user.getUsername());
-		user.setPassword(user.getPassword()); //bCryptPasswordEncoder.encode(...)
+		int value = getLastId();
+		value++;
+		user.setId(value);
 		user.setEnabled(true);
-		userRole.setUser(user);
-		
-		
-		
-		
 		getCurrentSession().save(user);
-		//session.flush();
+		sessionFactory.getCurrentSession().flush();
 		
 	}
 
+	@Override
+	public boolean isUserExists(User user) {
+		boolean result = false;
+		
+		try {
+			Query query = sessionFactory.getCurrentSession().createQuery("from Users where id='" + user.getId() + "");
+			User u = (User) query.uniqueResult();
+			if (u != null)
+				result = true;
+		} catch (Exception ex) {
+			// TODO: handle exception
+		} finally {
+			//sessionFactory.getCurrentSession().close();
+		}
+		return result;
+	}
+
+	public int getLastId(){
+		Criteria c = sessionFactory.getCurrentSession().createCriteria(User.class);
+        c.addOrder(Order.desc("id"));
+        c.setMaxResults(1);
+        int id = (int) ((User) c.uniqueResult()).getId();
+		return id;
+		
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<UserRole> getSearchRoles() {
+		return getCurrentSession().createQuery("from user_roles").list();
+		
+	}
+	
 }

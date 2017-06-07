@@ -21,6 +21,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
 @Table(name="userAssignProject")
@@ -31,7 +32,7 @@ public class UserAssignProject {
 	
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern="yyyy.MM.dd")
-	@Column(name = "dateCreationUserAssignProject")
+	@Column(name = "dateCreationUserAssignProject", columnDefinition = "TIMESTAMP default CURRENT_TIMESTAMP")
 	private Date dateCreationUserAssignProject;
 	
 	@OneToMany( /*fetch = FetchType.EAGER,*/ mappedBy="userAssignProject", targetEntity = Permission.class, cascade=CascadeType.ALL, fetch=FetchType.EAGER) 

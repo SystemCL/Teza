@@ -1,10 +1,13 @@
 package com.vlad.tickets.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.vlad.model.User;
+import com.vlad.model.UserRole;
 import com.vlad.tickets.dao.UserDao;
 
 @Service(value="userDAO")
@@ -23,5 +26,11 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public User findByUserName(String username) {
 		return userDAO.findByUserName(username);
+	}
+
+	@Override
+	public List<UserRole> getSearchRoles() {
+		// TODO Auto-generated method stub
+		return userDAO.getSearchRoles();
 	}
 }

@@ -31,6 +31,10 @@ public class UserRole{
 	@Column(name = "role", nullable = false, length = 45)
 	private String role;
 
+	/*
+	 * 
+	 * dsd*/
+	
 	public UserRole() {
 	}
 
