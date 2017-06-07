@@ -4,6 +4,8 @@ import java.util.List;
 
 import com.vlad.model.DomainProject;
 import com.vlad.model.Project;
+import com.vlad.model.Ticket;
+import com.vlad.model.UserAssignProject;
 
 public interface ProjectDAO {
 	public void addProject(Project project);

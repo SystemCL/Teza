@@ -6,6 +6,7 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -44,7 +45,7 @@ public class Ticket extends AbstractTimestampEntity {
 	@Column(name = "sujetTicket")
 	private String sujetTicket;
 	
-	@ManyToOne(/*fetch = FetchType.EAGER*/)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "project_id")
 	@JsonManagedReference
     private Project project;
@@ -69,7 +70,7 @@ public class Ticket extends AbstractTimestampEntity {
 	@JsonManagedReference
     private TypeMessage typeMessage;
 	
-	@OneToMany(mappedBy="ticket", targetEntity = StateTicket.class, cascade=CascadeType.ALL /*, fetch = FetchType.EAGER*/) 
+	@OneToMany(mappedBy="ticket", targetEntity = StateTicket.class, cascade=CascadeType.ALL, orphanRemoval = true , fetch = FetchType.LAZY) 
 	@JsonBackReference
 	private Set<StateTicket> states;
 	

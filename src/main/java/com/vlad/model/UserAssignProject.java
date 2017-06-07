@@ -44,7 +44,7 @@ public class UserAssignProject {
 	@JsonManagedReference
 	private Utilisateur utilisateur;
 	
-	@ManyToOne(/*fetch = FetchType.EAGER*/)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "project_id")
 	@JsonManagedReference
     private Project project;

@@ -26,6 +26,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.Cascade;
 import org.hibernate.search.annotations.Field;
 import org.hibernate.search.annotations.Index;
 import org.hibernate.search.annotations.Indexed;
@@ -75,11 +76,11 @@ public class Project extends AbstractTimestampEntity {
     @JsonProperty("beginninglife1")
     private String beginninglife1;
     
-    @OneToMany( /*fetch = FetchType.EAGER,*/ mappedBy="project", targetEntity = Ticket.class, cascade=CascadeType.ALL, fetch=FetchType.EAGER) 
+    @OneToMany( mappedBy="project", targetEntity = Ticket.class, fetch=FetchType.LAZY, orphanRemoval = true, cascade = CascadeType.ALL) 
     @JsonBackReference
     private Set<Ticket> tickets = new HashSet<Ticket>(0);
     
-    @OneToMany( /*fetch = FetchType.EAGER,*/ mappedBy="project", targetEntity = UserAssignProject.class, cascade=CascadeType.ALL, fetch=FetchType.EAGER) 
+    @OneToMany( mappedBy="project", targetEntity = UserAssignProject.class, fetch = FetchType.LAZY, orphanRemoval = true, cascade=CascadeType.ALL) 
     @JsonBackReference
     private Set<UserAssignProject> userAssignProjects = new HashSet<UserAssignProject>(0);
 	

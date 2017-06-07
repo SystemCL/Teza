@@ -121,30 +121,5 @@ public class UtilisateurController {
 		 return modelAndView;
 	 }
 	 
-/*	 @RequestMapping(value="/assign-user-project", method=RequestMethod.GET)
-	 public ModelAndView assignUserToProjectPage(Map<String, Object> map@ModelAttribute UserAssignProject userAssignProject){
-		 ModelAndView modelAndView = new ModelAndView("assign-user-project");
-		 List<Project> projects = projectService.getAllProjects();
-		 List<Utilisateur> utilisateurs = utilisateurService.getUtilisateurs();
-		 map.put("assignuserproject", new UserAssignProject());
-		 modelAndView.addObject("projectsList", projects);
-		 modelAndView.addObject("utilisateursList", utilisateurs);
-		 modelAndView.addObject("assignuserproject", new UserAssignProject());
-		 return modelAndView;
-		 
-	 }
-	 
-	 @RequestMapping(value="/assign-user-project", method=RequestMethod.POST)
-	 public ModelAndView assignUserToProject(@ModelAttribute UserAssignProject userAssignProject){
-		 ModelAndView modelAndView = new ModelAndView("home");
-			userAssignProjectService.addUserAssignProject(userAssignProject);
-			
-			String message = "User has been successfully assigned to project.";
-			modelAndView.addObject("message", message);
-			
-			return modelAndView;
-		 
-	 }*/
-
 
 }

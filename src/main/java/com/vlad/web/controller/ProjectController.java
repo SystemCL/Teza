@@ -137,7 +137,20 @@ public class ProjectController {
 		request.setAttribute("searchResult",pSearchResult);
 	    return modelAndView;
 	  }
-	
+
+	@RequestMapping(value="/{id}", method=RequestMethod.GET)
+	public ModelAndView viewProjectPage(@PathVariable Integer id, Map<String, Object> map) {
+		ModelAndView modelAndView = new ModelAndView("view-project-form");
+		
+		//public Project getProject(int id);
+		Project project = projectService.getProject(id);
+		/*List<DomainProject> domains = projectService.getDomains();
+		map.put("ticket", new Ticket());
+		Project project = projectService.getProject(id);
+		modelAndView.addObject("domainsList", domains);*/
+		modelAndView.addObject("project",project);
+		return modelAndView;
+	}
 	
 	@InitBinder
     public void initBinder(WebDataBinder binder) {

@@ -1,0 +1,10 @@
+@CHARSET "ISO-8859-1";
+
+#rectangle{
+    width:400px;
+    height:200px;
+    background:#cce0e0;
+    border-radius: 8px;
+    padding: 12px;
+    
+}

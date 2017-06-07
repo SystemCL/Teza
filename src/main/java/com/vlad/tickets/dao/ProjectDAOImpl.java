@@ -18,6 +18,7 @@ import org.springframework.stereotype.Repository;
 
 import com.vlad.model.DomainProject;
 import com.vlad.model.Project;
+import com.vlad.model.Ticket;
 import com.vlad.model.User;
 
 @Repository
@@ -61,7 +62,19 @@ public class ProjectDAOImpl implements ProjectDAO {
 	public void deleteProject(int id) {
 		Project project = getProject(id);
 		if(project != null)
-			getCurrentSession().delete(project);	
+			//project.getTickets().remove(project);
+		    //project.getUserAssignProjects().remove(project);
+		    /*project.getTickets().clear();
+	        project.getUserAssignProjects().clear();*/
+			project.getTickets().remove(project);
+		    project.getUserAssignProjects().remove(project);
+		    getCurrentSession().flush();
+		    project = (Project) getCurrentSession().merge(project);
+			//getCurrentSession().flush();
+			//getCurrentSession().delete(object);
+		    //Nu se sterge din baza de date
+		    //https://stackoverflow.com/questions/26532275/hibernate-how-to-correctly-delete-children-in-onetomany
+			
 	}
 
 	@SuppressWarnings("unchecked")

@@ -32,7 +32,7 @@
 <tbody>
 
 <c:forEach var="project" items="${projects}" varStatus="status">
-<tr onclick="window.document.location='#';">
+<tr onclick="window.document.location='${project.id}';">
 	<td align="center">${project.id}</td>
 	<td>${project.nomProject}</td>
 	<td align="center">${project.domainProject.nameDomain}</td>
@@ -82,7 +82,7 @@ function submitSearchForm() {
 	</thead> -->
 	<tbody>
 		<c:forEach var="project" items="${searchResult}" varStatus="status" >
-		<tr onclick="window.document.location='#';">
+		<tr onclick="window.document.location='${project.id}';">
 	    <td align="center" width="13.2%">${project.id}</td>
 		<td width="22.2%">${project.nomProject}</td>
 		<td align="center" width="24.9%">${project.domainProject.nameDomain}</td>
