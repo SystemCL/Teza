@@ -1,5 +1,6 @@
 package com.vlad.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -21,7 +22,7 @@ public class StateTicket {
 	@Column(name = "nomStateTicket")
 	private String nomStateTicket;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "ticket_id")
 	@JsonManagedReference
     private Ticket ticket;

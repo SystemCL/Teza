@@ -2,8 +2,10 @@ package com.vlad.model;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -32,17 +34,17 @@ public class Message {
 	@Column(name = "dateCreationM")
 	private Date dateCreationM;
 	
-	@ManyToOne(/*fetch = FetchType.EAGER*/)
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name = "ticket_id")
 	@JsonManagedReference
     private Ticket ticket;
 	
-	@ManyToOne(/*fetch = FetchType.EAGER*/)
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name = "utilisateur_id")
 	@JsonManagedReference
     private Utilisateur utilisateur;
 	
-	@ManyToOne(/*fetch = FetchType.EAGER*/)
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name = "typemessage_id")
 	@JsonManagedReference
     private TypeMessage typeMessage;

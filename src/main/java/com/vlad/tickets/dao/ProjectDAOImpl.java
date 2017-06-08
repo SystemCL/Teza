@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -20,6 +22,7 @@ import com.vlad.model.DomainProject;
 import com.vlad.model.Project;
 import com.vlad.model.Ticket;
 import com.vlad.model.User;
+import com.vlad.model.UserRole;
 
 @Repository
 public class ProjectDAOImpl implements ProjectDAO {
@@ -58,18 +61,40 @@ public class ProjectDAOImpl implements ProjectDAO {
 		return project;
 	}
 
+	@Transactional
 	@Override
 	public void deleteProject(int id) {
-		Project project = getProject(id);
-		if(project != null)
+/*		//Project project = getProject(id);
+		
+		//if(project != null)
 			//project.getTickets().remove(project);
 		    //project.getUserAssignProjects().remove(project);
-		    /*project.getTickets().clear();
-	        project.getUserAssignProjects().clear();*/
-			project.getTickets().remove(project);
+		    project.getTickets().clear();
+	        project.getUserAssignProjects().clear();
+		Object persistentInstance = getCurrentSession().load(Project.class, id);	
+		project.getTickets().remove(project);
 		    project.getUserAssignProjects().remove(project);
 		    getCurrentSession().flush();
 		    project = (Project) getCurrentSession().merge(project);
+		if(persistentInstance != null) {
+			getCurrentSession().delete(persistentInstance);
+		}*/
+		
+		String query = "FROM Project proj where proj.id= :id";
+		Query myQuery = getCurrentSession().createQuery(query);
+		myQuery.setParameter("id", id);
+		@SuppressWarnings("unchecked")
+		List<Project> projectList = myQuery.list();
+		for(int i=0; i<projectList.size(); i++) {
+			getCurrentSession().delete(projectList.get(i));
+		}
+	 
+		//getCurrentSession().delete(project);
+	
+		
+		//getCurrentSession().delete(project); 
+		
+		     //getCurrentSession().delete(project);
 			//getCurrentSession().flush();
 			//getCurrentSession().delete(object);
 		    //Nu se sterge din baza de date

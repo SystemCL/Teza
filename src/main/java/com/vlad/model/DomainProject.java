@@ -30,7 +30,7 @@ public class DomainProject {
 	@Column(name = "nameDomain")
 	private String nameDomain;
 	
-	@OneToMany( /*fetch = FetchType.EAGER,*/ mappedBy="domainProject", targetEntity = Project.class, cascade=CascadeType.ALL, fetch=FetchType.EAGER) 
+	@OneToMany(mappedBy="domainProject", targetEntity = Project.class, fetch=FetchType.LAZY) 
 	@JsonBackReference
 	private Set<Project> projects = new HashSet<Project>(0);
 	

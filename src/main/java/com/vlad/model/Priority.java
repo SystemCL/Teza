@@ -5,6 +5,7 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -22,7 +23,7 @@ public class Priority {
 	@Column(name = "nomPriority")
 	private String nomPriority;
 	
-	@OneToMany(mappedBy="priority", targetEntity = Ticket.class, cascade=CascadeType.ALL /*, fetch = FetchType.EAGER*/) 
+	@OneToMany(mappedBy="priority", targetEntity = Ticket.class, cascade=CascadeType.REMOVE, fetch = FetchType.EAGER) 
 	@JsonBackReference
 	private Set<Ticket> tickets;
 	

@@ -17,6 +17,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
@@ -35,16 +37,16 @@ public class UserAssignProject {
 	@Column(name = "dateCreationUserAssignProject", columnDefinition = "TIMESTAMP default CURRENT_TIMESTAMP")
 	private Date dateCreationUserAssignProject;
 	
-	@OneToMany( /*fetch = FetchType.EAGER,*/ mappedBy="userAssignProject", targetEntity = Permission.class, cascade=CascadeType.ALL, fetch=FetchType.EAGER) 
+	@OneToMany(fetch = FetchType.EAGER, mappedBy="userAssignProject", targetEntity = Permission.class, cascade=CascadeType.REMOVE, orphanRemoval = true) 
 	@JsonBackReference
 	private Set<Permission> permissions;
 	
-	@ManyToOne(/*fetch = FetchType.EAGER*/)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "utilisateur_id")
 	@JsonManagedReference
 	private Utilisateur utilisateur;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "project_id")
 	@JsonManagedReference
     private Project project;

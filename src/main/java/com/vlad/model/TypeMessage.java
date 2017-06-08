@@ -24,11 +24,11 @@ public class TypeMessage {
 	@Column(name = "nomTypeMessage")
 	private String nomTypeMessage;
 	
-	@OneToMany(mappedBy="typeMessage", targetEntity = Ticket.class, cascade=CascadeType.ALL /*, fetch = FetchType.EAGER*/) 
+	@OneToMany(mappedBy="typeMessage", targetEntity = Ticket.class, fetch = FetchType.LAZY) 
 	@JsonBackReference
 	private Set<Ticket> tickets = new HashSet<Ticket>(0);
 	
-	@OneToMany(mappedBy="typeMessage", targetEntity = Message.class, cascade=CascadeType.ALL , fetch = FetchType.EAGER) 
+	@OneToMany(mappedBy="typeMessage", targetEntity = Message.class, fetch = FetchType.LAZY) 
 	@JsonBackReference
 	private Set<Message> messages = new HashSet<Message>(0);
 	

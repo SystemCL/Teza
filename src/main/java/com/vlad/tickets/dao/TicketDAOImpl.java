@@ -57,7 +57,18 @@ public class TicketDAOImpl implements TicketDAO {
 
 	@Override
 	public void deleteTicket(int id) {
+/*		Ticket ticket = ticketDAO.getTicket(id);
+		Project project = ticket.getProject();
+		project.getTickets().remove(ticket);
+		projectDAO.updateProject(project);
+		ticketDAO.deleteTicket(ticket);*/
 		Ticket ticket = getTicket(id);
+/*		ticket.setProject(null);
+		ticket.setPriority(null);
+		ticket.setUtilisateur(null);
+		ticket.setSujetTicket(null);
+		ticket.setPermission(null);
+		ticket.setTypemessage(null);*/
 		if(ticket != null)
 			getCurrentSession().delete(ticket);	
 	}

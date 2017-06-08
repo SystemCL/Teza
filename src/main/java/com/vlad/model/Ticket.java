@@ -17,6 +17,8 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.UniqueConstraint;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.vlad.model.Utilisateur;
@@ -45,32 +47,32 @@ public class Ticket extends AbstractTimestampEntity {
 	@Column(name = "sujetTicket")
 	private String sujetTicket;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "project_id")
 	@JsonManagedReference
     private Project project;
 	
-	@ManyToOne(/*fetch = FetchType.EAGER*/)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "utilisateur_id")
 	@JsonManagedReference
     private Utilisateur utilisateur;
 	
-	@ManyToOne(/*fetch = FetchType.EAGER*/)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "priority_id")
 	@JsonManagedReference
     private Priority priority;
 	
-	@ManyToOne(/*fetch = FetchType.EAGER*/)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "permission_id")
 	@JsonManagedReference
     private Permission permission;
 	
-	@ManyToOne(/*fetch = FetchType.EAGER*/)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "typemessage_id")
 	@JsonManagedReference
     private TypeMessage typeMessage;
 	
-	@OneToMany(mappedBy="ticket", targetEntity = StateTicket.class, cascade=CascadeType.ALL, orphanRemoval = true , fetch = FetchType.LAZY) 
+	@OneToMany(mappedBy="ticket", targetEntity = StateTicket.class, orphanRemoval=true, cascade=CascadeType.REMOVE, fetch = FetchType.LAZY) 
 	@JsonBackReference
 	private Set<StateTicket> states;
 	

@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.vlad.model.Ticket;
@@ -37,24 +38,27 @@ public class Utilisateur {
 	@Column(name = "age")
 	private int age;
 	
-	@OneToMany( /*fetch = FetchType.EAGER,*/ mappedBy="utilisateur", targetEntity = Ticket.class, cascade=CascadeType.ALL, fetch=FetchType.EAGER) 
+	@OneToMany(mappedBy="utilisateur", targetEntity = Ticket.class, cascade=CascadeType.REMOVE, fetch=FetchType.LAZY, orphanRemoval=true) 
 	@JsonBackReference
 	private Set<Ticket> tickets = new HashSet<Ticket>(0);
 	
-	@OneToMany(mappedBy="utilisateur", targetEntity=UserAssignProject.class, cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@OneToMany(mappedBy="utilisateur", targetEntity = UserAssignProject.class, cascade=CascadeType.REMOVE, fetch=FetchType.LAZY, orphanRemoval=true)
 	@JsonBackReference
 	private Set<UserAssignProject> userAssignProjects = new HashSet<UserAssignProject>(0);
 	
-	@OneToMany(mappedBy="utilisateur", targetEntity=Message.class, cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@OneToMany(mappedBy="utilisateur", targetEntity=Message.class, cascade=CascadeType.REMOVE, fetch=FetchType.LAZY, orphanRemoval=true)
 	@JsonBackReference
 	private Set<Message> messages = new HashSet<Message>(0);
-	
 /*	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "domain_id")
 	@JsonProperty("domainProject")
 	@JsonManagedReference
     private DomainProject domainProject;*/
-
+	
+	@OneToOne(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
+	@JoinColumn(name="user")
+	private User user;
+	
 	public Integer getId() {
 		return id;
 	}
@@ -131,5 +135,13 @@ public class Utilisateur {
 	public void setMessages(Set<Message> messages) {
 		this.messages = messages;
 	}
+	
+	public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
+	}
+	
 	
 }

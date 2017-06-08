@@ -5,6 +5,7 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -29,12 +30,12 @@ public class Permission {
 	@Column(name = "bitwise")
 	private String bitwise;
 	
-	@ManyToOne(/*fetch = FetchType.EAGER*/)
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name = "userassignproject_id")
 	@JsonManagedReference
     private UserAssignProject userAssignProject;
 	
-	@OneToMany(mappedBy="permission", targetEntity = Ticket.class, cascade=CascadeType.ALL /*, fetch = FetchType.EAGER*/) 
+	@OneToMany(mappedBy="permission", targetEntity = Ticket.class, fetch = FetchType.EAGER/*, orphanRemoval = true*/) 
 	@JsonBackReference
 	private Set<Ticket> tickets;
 	

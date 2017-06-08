@@ -21,27 +21,25 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
-@Table(name = "users", catalog = "test1")
+@Table(name = "user")
 public class User {
 
-/*	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="id", unique=true, nullable=false)*/
-/*	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="id", unique=true, nullable=false, updatable=false)*/
 	@Id
-	@GeneratedValue(strategy = GenerationType.TABLE)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="id")
 	private Integer id;
 	private String username;
 	private String password;
 	private boolean enabled;
 	@JsonBackReference
-	private Set<UserRole> userRole = new HashSet<UserRole>(0);
-	@OneToOne(cascade={CascadeType.ALL}, fetch = FetchType.LAZY, targetEntity = Utilisateur.class)
+	//  @OneToMany( cascade=CascadeType.REMOVE, mappedBy="project", targetEntity = Ticket.class, fetch=FetchType.LAZY, orphanRemoval = true) 
+	@OneToMany(cascade = CascadeType.REMOVE, mappedBy="user", targetEntity = UserRole.class, fetch=FetchType.EAGER, orphanRemoval = true) 
+	private Set<UserRole> userRole;
+	@OneToOne(mappedBy="user",cascade=CascadeType.REMOVE,  fetch = FetchType.EAGER, orphanRemoval = true, targetEntity = Utilisateur.class)
 	@JoinColumn(name="userUtilisateur")
 	@JsonManagedReference
     private Utilisateur userUtilisateur;
+
 
 	public User() {
 	}

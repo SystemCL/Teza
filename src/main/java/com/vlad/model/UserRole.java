@@ -2,6 +2,7 @@ package com.vlad.model;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -21,19 +22,19 @@ import com.vlad.model.*;;
 		columnNames = { "role", "username" }))
 public class UserRole{
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue/*(strategy = GenerationType.IDENTITY)*/
 	@Column(name = "user_role_id",
 		unique = true, nullable = false)
 	private Integer userRoleId;
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "username", nullable = false)
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "username"/*, nullable = false*/)
 	private User user;
 	@Column(name = "role", nullable = false, length = 45)
 	private String role;
 
 	/*
 	 * 
-	 * dsd*/
+	 * */
 	
 	public UserRole() {
 	}

@@ -62,7 +62,7 @@ public class Project extends AbstractTimestampEntity {
 	@JsonProperty("nomProject")
 	private String nomProject;
 	
-	@ManyToOne(/*fetch = FetchType.EAGER*/)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "domain_id")
 	@JsonProperty("domainProject")
 	@JsonManagedReference
@@ -76,11 +76,11 @@ public class Project extends AbstractTimestampEntity {
     @JsonProperty("beginninglife1")
     private String beginninglife1;
     
-    @OneToMany( mappedBy="project", targetEntity = Ticket.class, fetch=FetchType.LAZY, orphanRemoval = true, cascade = CascadeType.ALL) 
+    @OneToMany( cascade=CascadeType.REMOVE, mappedBy="project", targetEntity = Ticket.class, fetch=FetchType.LAZY, orphanRemoval = true) 
     @JsonBackReference
     private Set<Ticket> tickets = new HashSet<Ticket>(0);
     
-    @OneToMany( mappedBy="project", targetEntity = UserAssignProject.class, fetch = FetchType.LAZY, orphanRemoval = true, cascade=CascadeType.ALL) 
+    @OneToMany( cascade=CascadeType.REMOVE, mappedBy="project", targetEntity = UserAssignProject.class, fetch = FetchType.LAZY, orphanRemoval = true) 
     @JsonBackReference
     private Set<UserAssignProject> userAssignProjects = new HashSet<UserAssignProject>(0);
 	
