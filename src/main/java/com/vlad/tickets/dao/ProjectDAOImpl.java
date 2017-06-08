@@ -112,17 +112,22 @@ public class ProjectDAOImpl implements ProjectDAO {
 				"FROM Project WHERE id IN "
 				+ "(SELECT project FROM UserAssignProject WHERE utilisateur = "
 				+ "(SELECT id FROM Utilisateur WHERE id ="
-				+ "(SELECT userUtilisateur FROM User WHERE username = :username))) order by id asc");
-		if(auth instanceof UserDetails) {
-			String userName = ((UserDetails)auth).getUsername();
-			query.setParameter("username", userName);
-			List<Project> list = query.list();
-			return list;
-		} else {
-			String userName = auth.getName();
-			query.setParameter("username", userName);
-			List<Project> list = query.list();
-			return list;
+				+ "(SELECT userUtilisateur FROM User WHERE username = :username))) order by id asc").setCacheable(true);
+		try {
+			if (auth instanceof UserDetails) {
+				String userName = ((UserDetails) auth).getUsername();
+				query.setParameter("username", userName);
+				List<Project> list = query.list();
+				return list;
+			} else {
+				String userName = auth.getName();
+				query.setParameter("username", userName);
+				List<Project> list = query.list();
+				return list;
+			} 
+		} finally {
+			System.out.println("Collection count = " +(getCurrentSession().getStatistics().getCollectionCount()));
+			System.out.println("Entity count = " +getCurrentSession().getStatistics().getEntityCount());
 		}
 		
 		//User user = (User)SecurityContextHolder.getContext().getAuthentication();	

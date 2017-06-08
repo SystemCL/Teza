@@ -12,5 +12,7 @@ public interface UserService {
 	public User findByUserName(String username);
 	
 	public List<UserRole> getSearchRoles();
+	
+	public boolean isUserExists(User user);
 
 }

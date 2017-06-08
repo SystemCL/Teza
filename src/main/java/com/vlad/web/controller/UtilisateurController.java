@@ -89,9 +89,6 @@ public class UtilisateurController {
 	 @RequestMapping(value="/edit/{id}", method=RequestMethod.GET)
 	 public ModelAndView editUtilisateurPage(@PathVariable Integer id/*, Map<String, Object> map*/) {
 		 ModelAndView modelAndView = new ModelAndView("edit-utilisateur-form");
-		// List<Project> projects = utilisateurService.getProjects();
-		// Hibernate.initialize(addressService.);
-		// model.put("utilisateur", new Utilisateur());
 		 Utilisateur utilisateur = utilisateurService.getUtilisateur(id);
 		 //modelAndView.addObject("projectsList", projects);
 		 modelAndView.addObject("utilisateur", utilisateur);

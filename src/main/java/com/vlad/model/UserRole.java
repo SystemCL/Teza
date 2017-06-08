@@ -27,7 +27,7 @@ public class UserRole{
 		unique = true, nullable = false)
 	private Integer userRoleId;
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "username"/*, nullable = false*/)
+	@JoinColumn(name = "username", nullable = false)
 	private User user;
 	@Column(name = "role", nullable = false, length = 45)
 	private String role;

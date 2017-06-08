@@ -49,7 +49,7 @@ import com.vlad.model.Ticket;
 @Entity
 @Table(name="project")
 //@JsonAutoDetect(fieldVisibility = Visibility.ANY, getterVisibility = Visibility.NONE, setterVisibility = Visibility.NONE, creatorVisibility=Visibility.NONE)
-//@Cache(usage=CacheConcurrencyStrategy.READ_WRITE)
+@Cache(usage=CacheConcurrencyStrategy.READ_WRITE, region="project")
 /*@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@projectId")*/
 public class Project extends AbstractTimestampEntity {
 	@Id

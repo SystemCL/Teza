@@ -74,6 +74,7 @@ public class MainController {
 	@RequestMapping(value="/registration", method=RequestMethod.POST)
 	public ModelAndView registrationUser(@ModelAttribute User user, HttpServletRequest request){
 		ModelAndView modelAndView = new ModelAndView("home");
+		//ModelAndView modelAndView2 = new ModelAndView("login");
 		//modelAndView.addObject("user", new User());
 		/*String username = request.getParameter("username");
 		String password = request.getParameter("password");
@@ -83,13 +84,14 @@ public class MainController {
 		this.password = password;
 		this.enabled = enabled;
 		this.userRole = userRole;
-		
+		//Invalid username and password!
 		user = new User(username,password, true);*/
 		userService.save(user);
 		String message = "User was successfully registered";
 		modelAndView.addObject("message", message);
 		return modelAndView;
-		
+
+		//UserRole
 	}
 	
 	@RequestMapping(value = "/login", method = RequestMethod.GET)

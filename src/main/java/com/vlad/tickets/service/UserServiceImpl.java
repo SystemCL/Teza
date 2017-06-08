@@ -33,4 +33,10 @@ public class UserServiceImpl implements UserService {
 		// TODO Auto-generated method stub
 		return userDAO.getSearchRoles();
 	}
+
+	@Override
+	public boolean isUserExists(User user) {
+		
+		return userDAO.isUserExists(user);
+	}
 }

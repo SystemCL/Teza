@@ -17,6 +17,8 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.UniqueConstraint;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -30,6 +32,7 @@ import com.vlad.model.Project;
 
 @Entity
 @Table(name="ticket")
+@Cache(usage=CacheConcurrencyStrategy.READ_WRITE, region="ticket")
 /*@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@ticketId")*/
 public class Ticket extends AbstractTimestampEntity {
 	@Id

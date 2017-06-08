@@ -89,8 +89,13 @@ public class TicketDAOImpl implements TicketDAO {
 				+ "(SELECT id FROM User WHERE username = :username))))"); 
 		
 		query.setParameter("username", userName);
-		List<Ticket> list = query.list();
-		return list;
+		try {
+			List<Ticket> list = query.setCacheable(true).list();
+			return list;
+		} finally {
+			System.out.println("Collection count = " +(getCurrentSession().getStatistics().getCollectionCount()));
+			System.out.println("Entity count = " +getCurrentSession().getStatistics().getEntityCount());
+		}
 		
 		/*return getCurrentSession().createQuery("FROM Ticket WHERE utilisateur_id IN "
 				+ "(SELECT id FROM Project WHERE id = "

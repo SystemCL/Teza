@@ -53,7 +53,10 @@ public class AppConfig extends WebMvcConfigurerAdapter {
         prop.put("spring.jpa.properties.hibernate.search.default.directory_provider", "filesystem");
         prop.put("spring.jpa.properties.hibernate.search.default.indexBase", "/var/lucene/indexes");
         prop.put("spring.jpa.properties.hibernate.search.default.indexmanager", "near-real-time");
-        //
+        prop.put("hibernate.cache.use_second_level_cache", "true");
+        prop.put("hibernate.cache.region.factory_class", "org.hibernate.cache.ehcache.EhCacheRegionFactory"); 
+        prop.put("hibernate.cache.use_query_cache","true");
+        //prop.put("hibernate.cache.provider_class","org.hibernate.cache.EhCacheProvider");
         // prop.put("hibernate.enable_lazy_load_no_trans", "true");
         return prop;
     }
