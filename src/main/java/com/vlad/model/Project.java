@@ -31,6 +31,9 @@ import org.hibernate.search.annotations.Field;
 import org.hibernate.search.annotations.Index;
 import org.hibernate.search.annotations.Indexed;
 import org.hibernate.search.annotations.Store;
+import org.joda.time.Instant;
+import org.joda.time.Interval;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
@@ -45,13 +48,21 @@ import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.vlad.model.Ticket;
+import com.vlad.tickets.dao.ProjectDAO;
 
 @Entity
 @Table(name="project")
 //@JsonAutoDetect(fieldVisibility = Visibility.ANY, getterVisibility = Visibility.NONE, setterVisibility = Visibility.NONE, creatorVisibility=Visibility.NONE)
-@Cache(usage=CacheConcurrencyStrategy.READ_WRITE, region="project")
+@Cacheable(value="projectCache"/*, usage=CacheConcurrencyStrategy.READ_WRITE, region="project"*/)
 /*@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@projectId")*/
 public class Project extends AbstractTimestampEntity {
+	public Set<ProjectAssignTicket> getProjectAssignTickets() {
+		return projectAssignTickets;
+	}
+	public void setProjectAssignTickets(Set<ProjectAssignTicket> projectAssignTickets) {
+		this.projectAssignTickets = projectAssignTickets;
+	}
+
 	@Id
 	@GeneratedValue
 	@JsonProperty("id")
@@ -83,6 +94,10 @@ public class Project extends AbstractTimestampEntity {
     @OneToMany( cascade=CascadeType.REMOVE, mappedBy="project", targetEntity = UserAssignProject.class, fetch = FetchType.LAZY, orphanRemoval = true) 
     @JsonBackReference
     private Set<UserAssignProject> userAssignProjects = new HashSet<UserAssignProject>(0);
+    
+    @OneToMany( cascade=CascadeType.REMOVE, mappedBy="project", targetEntity = ProjectAssignTicket.class, fetch = FetchType.LAZY, orphanRemoval = true) 
+    @JsonBackReference
+    private Set<ProjectAssignTicket> projectAssignTickets = new HashSet<ProjectAssignTicket>(0);
 	
 	public Integer getId() {
 		return id;
@@ -115,7 +130,8 @@ public class Project extends AbstractTimestampEntity {
 			    	
 			    	Date startDate = dateCreationP;
 			    	Date now = new Date();
-		
+		//Interval interval = new Interval(startDate - new Instant());
+			    	
 		long duration  = now.getTime() - startDate.getTime();
 		long diffInSeconds = TimeUnit.MILLISECONDS.toSeconds(duration);
 		long diffInMinutes = TimeUnit.MILLISECONDS.toMinutes(duration);

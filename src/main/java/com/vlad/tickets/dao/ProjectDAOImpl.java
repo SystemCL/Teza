@@ -112,7 +112,7 @@ public class ProjectDAOImpl implements ProjectDAO {
 				"FROM Project WHERE id IN "
 				+ "(SELECT project FROM UserAssignProject WHERE utilisateur = "
 				+ "(SELECT id FROM Utilisateur WHERE id ="
-				+ "(SELECT userUtilisateur FROM User WHERE username = :username))) order by id asc").setCacheable(true);
+				+ "(SELECT userUtilisateur FROM User WHERE username = :username))) order by id asc")/*.setCacheable(true)*/;
 		try {
 			if (auth instanceof UserDetails) {
 				String userName = ((UserDetails) auth).getUsername();
@@ -168,7 +168,9 @@ public class ProjectDAOImpl implements ProjectDAO {
 		List<Project> projectSearchList = ftq.list();*/
 		
 		Query query = sessionFactory.getCurrentSession().createQuery(
-				"Select a FROM Project a WHERE a.nomProject like ?");
+				//"Select a FROM Project a WHERE a.nomProject like ? OR a.dateCreationP like ?");
+				  "Select a FROM Project a WHERE a.nomProject like ?");
+
 		query.setParameter(0, "%" + text + "%");
 		@SuppressWarnings("unchecked")
 		List<Project> list = new LinkedList<Project>();

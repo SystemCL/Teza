@@ -19,6 +19,7 @@ public interface TicketService {
 	public List<Priority> getPriorities();
 	public List<Project> getProjects();
 	public List<Utilisateur> getUtilisateurs();
+	public List<Ticket> getAllTickets();
 	
 
 }

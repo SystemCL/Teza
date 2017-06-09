@@ -1,6 +1,7 @@
 package com.vlad.model;
 
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -21,6 +22,7 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.vlad.model.Utilisateur;
@@ -32,7 +34,7 @@ import com.vlad.model.Project;
 
 @Entity
 @Table(name="ticket")
-@Cache(usage=CacheConcurrencyStrategy.READ_WRITE, region="ticket")
+@Cacheable(value="ticketCache"/* usage=CacheConcurrencyStrategy.READ_WRITE, region="ticket"*/)
 /*@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@ticketId")*/
 public class Ticket extends AbstractTimestampEntity {
 	@Id
@@ -78,6 +80,10 @@ public class Ticket extends AbstractTimestampEntity {
 	@OneToMany(mappedBy="ticket", targetEntity = StateTicket.class, orphanRemoval=true, cascade=CascadeType.REMOVE, fetch = FetchType.LAZY) 
 	@JsonBackReference
 	private Set<StateTicket> states;
+	
+	@OneToMany(mappedBy="ticket", targetEntity = ProjectAssignTicket.class, cascade=CascadeType.REMOVE, fetch=FetchType.LAZY, orphanRemoval=true)
+	@JsonBackReference
+	private Set<ProjectAssignTicket> ticketAssignProjects = new HashSet<ProjectAssignTicket>(0);
 	
 	public Integer getId() {
 		return id;
@@ -140,5 +146,10 @@ public class Ticket extends AbstractTimestampEntity {
 	public void setStates(Set<StateTicket> states) {
 		this.states = states;
 	}
-	
+	public Set<ProjectAssignTicket> getTicketAssignProjects() {
+		return ticketAssignProjects;
+	}
+	public void setTicketAssignProjects(Set<ProjectAssignTicket> ticketAssignProjects) {
+		this.ticketAssignProjects = ticketAssignProjects;
+	}
 }

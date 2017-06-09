@@ -74,6 +74,12 @@ public class TicketServiceImpl  implements TicketService{
 		return ticketDAO.getTickets();
 	}
 
+	@Override
+	public List<Ticket> getAllTickets() {
+		// TODO Auto-generated method stub
+		return ticketDAO.getAllTickets();
+	}
+
 
 
 }

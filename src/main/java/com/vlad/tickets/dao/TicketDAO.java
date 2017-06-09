@@ -18,5 +18,6 @@ public interface TicketDAO {
 	public List<Priority> getPriorities();
 	public List<Project> getProjects();
 	public List<Utilisateur> getUtilisateurs();
+	public List<Ticket> getAllTickets();
 	
 }

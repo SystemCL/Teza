@@ -28,7 +28,7 @@
 </thead>
 <tbody>
 <c:forEach var="ticket" items="${tickets}">
-<tr>
+<tr onclick="window.document.location='${ticket.id}';">
  	<td align="center">${ticket.id}</td> 
 	<td>${ticket.nomTicket}</td>
 	<td>${ticket.dateCreationT}</td>
@@ -43,6 +43,7 @@
 </table>
 </div>
 
+<p><a href="${pageContext.request.contextPath}/assign-ticket-project.html">Assign ticket to project</a></p>
 <p><a href="${pageContext.request.contextPath}/index.html">Back to page</a></p>
 
 </body>

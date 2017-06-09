@@ -90,7 +90,7 @@ public class TicketDAOImpl implements TicketDAO {
 		
 		query.setParameter("username", userName);
 		try {
-			List<Ticket> list = query.setCacheable(true).list();
+			List<Ticket> list = query/*.setCacheable(true)*/.list();
 			return list;
 		} finally {
 			System.out.println("Collection count = " +(getCurrentSession().getStatistics().getCollectionCount()));
@@ -130,6 +130,12 @@ public class TicketDAOImpl implements TicketDAO {
 		return getCurrentSession().createQuery("from Priority").list();
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Ticket> getAllTickets() {
+		return getCurrentSession().createQuery("from Ticket").list();
+		
+	}
 
 	
 }
